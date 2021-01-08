@@ -17,7 +17,7 @@ Here are some ideas to get you started:
 <a href="https://wakatime.com"><img src="https://wakatime.com/share/@f3984d9b-c732-4e65-82d6-93c8a8f73f76/dc47acc2-5dd2-4f56-a3f5-f5da3eec6021.png" /></a>
 -->
 
-[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=josway&show_icons=true&theme=cobalt)
+[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=josway&show_icons=true&theme=default)
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=josway&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 
