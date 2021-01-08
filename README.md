@@ -1,4 +1,4 @@
-### Hi there 👋
+### Hi 👋
 
 <!--
 **josways/josways** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,8 +14,5 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-
-
-📊 **This week I spent my time on**
 
 <a href="https://wakatime.com"><img src="https://wakatime.com/share/@f3984d9b-c732-4e65-82d6-93c8a8f73f76/dc47acc2-5dd2-4f56-a3f5-f5da3eec6021.png" /></a>
