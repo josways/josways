@@ -1,25 +1,10 @@
 <!--
-**josways/josways** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=josway&show_icons=true&theme=default)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=josway&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 -->
 
-<!--
-<a href="https://wakatime.com"><img src="https://wakatime.com/share/@f3984d9b-c732-4e65-82d6-93c8a8f73f76/dc47acc2-5dd2-4f56-a3f5-f5da3eec6021.png" /></a>
--->
-
-[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=josway&show_icons=true&theme=default)
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=josway&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
-
+![Anurag's github stats](https://github-readme-stats-taupe-two.vercel.app/api?username=josway&show_icons=true&theme=default)
+![Top Langs](https://github-readme-stats-taupe-two.vercel.app/api/top-langs/?username=josway&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 
 ![Wwakatime stats](https://github-readme-stats-taupe-two.vercel.app/api/wakatime?username=f3984d9b-c732-4e65-82d6-93c8a8f73f76&hide_title=true&hide_border=true&langs_count=5)
