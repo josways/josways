@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="相关资料参考https:&#x2F;&#x2F;github.com&#x2F;Grasscutters&#x2F;Grasscutter&#x2F;wiki &gt; https:&#x2F;&#x2F;blog.tomys.top&#x2F;2022-04&#x2F;genshintj&#x2F; &gt; https:&#x2F;&#x2F;blog.otoo.top&#x2F;Blog&#x2F;Genshin2-6-Grasscutters&#x2F; &gt; https:&#x2F;&#x2F;memorz.top&#x2F;archives&#x2F;112  客户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原魔">
+<meta property="og:url" content="https://blog.josway.cc/2022/05/04/yuque/%E5%8E%9F%E9%AD%94/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="相关资料参考https:&#x2F;&#x2F;github.com&#x2F;Grasscutters&#x2F;Grasscutter&#x2F;wiki &gt; https:&#x2F;&#x2F;blog.tomys.top&#x2F;2022-04&#x2F;genshintj&#x2F; &gt; https:&#x2F;&#x2F;blog.otoo.top&#x2F;Blog&#x2F;Genshin2-6-Grasscutters&#x2F; &gt; https:&#x2F;&#x2F;memorz.top&#x2F;archives&#x2F;112  客户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667367008-e0c8c7c2-57af-416a-aee3-5e8060feed8b.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=400&id=uabe62db8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1329&originWidth=1832&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=114733&status=done&style=none&taskId=u3be1a87a-b664-4b90-b8e9-f9a35b26080&title=&width=552">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651995321432-52242d58-3149-4c50-b972-6a8360d341e1.png#clientId=u4a851f06-56a7-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=436&id=u2949385d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=872&originWidth=952&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36294&status=done&style=none&taskId=ue9761fe7-962f-4940-ad81-406412d70ca&title=&width=476">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667962395-caa1f890-353a-40e9-b125-c3f725928358.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=388&id=u596e17ac&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1355&originWidth=1100&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=138348&status=done&style=none&taskId=ue1a25509-31e7-4774-bcce-ef4df769854&title=&width=315">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667726358-52a73dcf-430b-4e86-aca2-b37e52cdbe26.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=323&id=u2bc3a029&margin=%5Bobject%20Object%5D&name=d7635089e47af294d93f15387c91eb0.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=879070&status=done&style=none&taskId=u99074117-5536-4087-9c36-225d761ea83&title=&width=212">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667739771-5687a991-de0b-4d03-bf2f-4658465b4655.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=321&id=u60f1bc34&margin=%5Bobject%20Object%5D&name=c4475e4284ef0868aff7299a4d7d957.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1142392&status=done&style=none&taskId=u7c78930d-ae55-4280-92a7-59f6e05c5e0&title=&width=211">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667773213-88e88bc5-54e0-4fdc-87c6-2e56c1ebda88.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=320&id=u7eae44f0&margin=%5Bobject%20Object%5D&name=d89a2c0af892a0ecfd1da293577c4c6.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=696044&status=done&style=none&taskId=u9a02063f-1add-44ad-a71a-3198e324252&title=&width=210">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667887547-11330624-5fa8-43db-aab1-40a101f6473b.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=0.8392&from=paste&height=439&id=u2a7bbc5f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1578&originWidth=1121&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=167850&status=done&style=none&taskId=uf59d25a7-2862-49e8-a723-53e85306e08&title=&width=312">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668165461-744fc4cf-79a1-4ac5-93b5-59ea7ec4666c.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=445&id=u775e3ea5&margin=%5Bobject%20Object%5D&name=baeb80230ddd61930053ea5978e449e.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=700834&status=done&style=none&taskId=u3a6534df-0fc8-4eab-a298-a0f7b31d7a7&title=&width=292">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668183676-0bfdde59-73fc-4080-bf89-dfa0f57d6967.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=442&id=u28f467eb&margin=%5Bobject%20Object%5D&name=e1b2209838a4541504701b5a512b440.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=715084&status=done&style=none&taskId=ud86b2f4d-35eb-4191-8e50-87ccbe1186b&title=&width=290">
+<meta property="article:published_time" content="2022-05-04T10:48:47.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.923Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="原神">
+<meta property="article:tag" content="Genshin Impact">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667367008-e0c8c7c2-57af-416a-aee3-5e8060feed8b.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=400&id=uabe62db8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1329&originWidth=1832&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=114733&status=done&style=none&taskId=u3be1a87a-b664-4b90-b8e9-f9a35b26080&title=&width=552">
+  
+  
+  
+  <title>原魔 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="原魔"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-04 18:48" pubdate>
+          2022年5月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          686 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">原魔</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>相关资料参考<br><a target="_blank" rel="noopener" href="https://github.com/Grasscutters/Grasscutter/wiki">https://github.com/Grasscutters/Grasscutter/wiki</a> &gt; <a target="_blank" rel="noopener" href="https://blog.tomys.top/2022-04/genshintj/">https://blog.tomys.top/2022-04/genshintj/</a> &gt; <a target="_blank" rel="noopener" href="https://blog.otoo.top/Blog/Genshin2-6-Grasscutters/">https://blog.otoo.top/Blog/Genshin2-6-Grasscutters/</a> &gt; <a target="_blank" rel="noopener" href="https://memorz.top/archives/112">https://memorz.top/archives/112</a></p>
+</blockquote>
+<h1 id="客户端部分（白嫖的人看"><a href="#客户端部分（白嫖的人看" class="headerlink" title="客户端部分（白嫖的人看"></a>客户端部分（白嫖的人看</h1><p>代理 IP 地址：<strong>josway.cc</strong><br>端口：<strong>54321</strong></p>
+<h2 id="Windows-Win10-x2F-11"><a href="#Windows-Win10-x2F-11" class="headerlink" title="Windows Win10 &#x2F; 11"></a>Windows Win10 &#x2F; 11</h2><h3 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h3><p>设置 -&gt; 网络和 Internet -&gt; 代理 -&gt; 手动设置代理 -&gt; 使用代理服务器 -&gt; 编辑<br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667367008-e0c8c7c2-57af-416a-aee3-5e8060feed8b.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=400&id=uabe62db8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1329&originWidth=1832&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=114733&status=done&style=none&taskId=u3be1a87a-b664-4b90-b8e9-f9a35b26080&title=&width=552" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651995321432-52242d58-3149-4c50-b972-6a8360d341e1.png#clientId=u4a851f06-56a7-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=436&id=u2949385d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=872&originWidth=952&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36294&status=done&style=none&taskId=ue9761fe7-962f-4940-ad81-406412d70ca&title=&width=476" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="然后直接打开-国服-x2F-国际服-客户端-开始游戏即可。"><a href="#然后直接打开-国服-x2F-国际服-客户端-开始游戏即可。" class="headerlink" title="然后直接打开 国服&#x2F;国际服 客户端 开始游戏即可。"></a>然后直接打开 国服&#x2F;国际服 客户端 开始游戏即可。</h3><h3 id="下载、信任证书-（可选操作，如果不能直接开始游戏-操作此步骤"><a href="#下载、信任证书-（可选操作，如果不能直接开始游戏-操作此步骤" class="headerlink" title="下载、信任证书 （可选操作，如果不能直接开始游戏 操作此步骤"></a>下载、信任证书 （可选操作，如果不能直接开始游戏 操作此步骤</h3><p>使用浏览器 访问 <a target="_blank" rel="noopener" href="http://mitm.it/">http://mitm.it/</a><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667962395-caa1f890-353a-40e9-b125-c3f725928358.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=388&id=u596e17ac&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1355&originWidth=1100&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=138348&status=done&style=none&taskId=ue1a25509-31e7-4774-bcce-ef4df769854&title=&width=315" srcset="/img/loading.gif" lazyload alt="image.png"><br>双击打开相应服务器的证书 -&gt; 安装证书 -&gt; 本地计算机 -&gt; 放入下列…-&gt; 浏览 -&gt; 受信任的根证书颁发机构 -&gt; 完成 （途中其他选项一律默认下一步即可</p>
+<h2 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h2><h3 id="配置代理-1"><a href="#配置代理-1" class="headerlink" title="配置代理"></a>配置代理</h3><p>设置 -&gt; 无线局域网 -&gt; 点击当前链接 WIFI 的最右边蓝色的圈 -&gt; 配置代理（HTTP 代理）<br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667726358-52a73dcf-430b-4e86-aca2-b37e52cdbe26.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=323&id=u2bc3a029&margin=%5Bobject%20Object%5D&name=d7635089e47af294d93f15387c91eb0.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=879070&status=done&style=none&taskId=u99074117-5536-4087-9c36-225d761ea83&title=&width=212" srcset="/img/loading.gif" lazyload alt="d7635089e47af294d93f15387c91eb0.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667739771-5687a991-de0b-4d03-bf2f-4658465b4655.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=321&id=u60f1bc34&margin=%5Bobject%20Object%5D&name=c4475e4284ef0868aff7299a4d7d957.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1142392&status=done&style=none&taskId=u7c78930d-ae55-4280-92a7-59f6e05c5e0&title=&width=211" srcset="/img/loading.gif" lazyload alt="c4475e4284ef0868aff7299a4d7d957.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667773213-88e88bc5-54e0-4fdc-87c6-2e56c1ebda88.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=320&id=u7eae44f0&margin=%5Bobject%20Object%5D&name=d89a2c0af892a0ecfd1da293577c4c6.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=696044&status=done&style=none&taskId=u9a02063f-1add-44ad-a71a-3198e324252&title=&width=210" srcset="/img/loading.gif" lazyload alt="d89a2c0af892a0ecfd1da293577c4c6.png"></p>
+<h3 id="下载证书并信任"><a href="#下载证书并信任" class="headerlink" title="下载证书并信任"></a>下载证书并信任</h3><p>使用 safari 访问 <a target="_blank" rel="noopener" href="http://mitm.it/">http://mitm.it/</a><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651667887547-11330624-5fa8-43db-aab1-40a101f6473b.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=0.8392&from=paste&height=439&id=u2a7bbc5f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1578&originWidth=1121&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=167850&status=done&style=none&taskId=uf59d25a7-2862-49e8-a723-53e85306e08&title=&width=312" srcset="/img/loading.gif" lazyload alt="image.png"><br>通用 -&gt; VPN 与设备管理<br>通用 -&gt; 关于手机 -&gt; 证书信任设置<br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668165461-744fc4cf-79a1-4ac5-93b5-59ea7ec4666c.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=445&id=u775e3ea5&margin=%5Bobject%20Object%5D&name=baeb80230ddd61930053ea5978e449e.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=700834&status=done&style=none&taskId=u3a6534df-0fc8-4eab-a298-a0f7b31d7a7&title=&width=292" srcset="/img/loading.gif" lazyload alt="baeb80230ddd61930053ea5978e449e.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668183676-0bfdde59-73fc-4080-bf89-dfa0f57d6967.png#clientId=ub2e1cba3-767d-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=442&id=u28f467eb&margin=%5Bobject%20Object%5D&name=e1b2209838a4541504701b5a512b440.png&originHeight=2266&originWidth=1488&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=715084&status=done&style=none&taskId=ud86b2f4d-35eb-4191-8e50-87ccbe1186b&title=&width=290" srcset="/img/loading.gif" lazyload alt="e1b2209838a4541504701b5a512b440.png"></p>
+<h2 id="android"><a href="#android" class="headerlink" title="android"></a>android</h2><p>需要 ROOT （安装证书到系统必要条件<br>暂无教程（没测试</p>
+<h1 id="服务端部分-（白嫖的人不用看"><a href="#服务端部分-（白嫖的人不用看" class="headerlink" title="服务端部分 （白嫖的人不用看"></a>服务端部分 （白嫖的人不用看</h1><h2 id="直接鸽"><a href="#直接鸽" class="headerlink" title="直接鸽~"></a>直接鸽~</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.tomys.top/2022-04/genshintj/">https://blog.tomys.top/2022-04/genshintj/</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%B8%E6%88%8F%E6%95%99%E7%A8%8B/" class="category-chain-item">游戏教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E7%A5%9E/">#原神</a>
+      
+        <a href="/tags/Genshin-Impact/">#Genshin Impact</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>原魔</div>
+      <div>https://blog.josway.cc/2022/05/04/yuque/原魔/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/04/yuque/Java%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Java环境配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java环境配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/01/yuque/%E5%AE%89%E8%A3%85Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="安装Windows操作系统">
+                        <span class="hidden-mobile">安装Windows操作系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

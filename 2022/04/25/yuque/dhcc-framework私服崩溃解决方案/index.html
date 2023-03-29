@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DHCC-FRAMEWORK 框架的手动安装教程。 基础条件下载相关文件dhccFrame.zipMaven  (建议配置 aliyun-maven 镜像源) 本地磁盘拥有 D盘 PS:无此盘符，或者不想放在此盘符，需自行修改 Maven 的 setting.xml , 和第三步中的命令。  PS: 其他版本 dhcc-framework 也可以! 自己收集相应版本的 Jar 包. 照猫画虎,修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dhcc-framework私服崩溃解决方案">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/dhcc-framework%E7%A7%81%E6%9C%8D%E5%B4%A9%E6%BA%83%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="DHCC-FRAMEWORK 框架的手动安装教程。 基础条件下载相关文件dhccFrame.zipMaven  (建议配置 aliyun-maven 镜像源) 本地磁盘拥有 D盘 PS:无此盘符，或者不想放在此盘符，需自行修改 Maven 的 setting.xml , 和第三步中的命令。  PS: 其他版本 dhcc-framework 也可以! 自己收集相应版本的 Jar 包. 照猫画虎,修改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900680487-a78bccc1-1db6-48c9-be77-f6eb69c88316.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0db3a5ba&name=dhccFrame%E7%9B%B8%E5%85%B31.png&originHeight=743&originWidth=740&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=58045&status=done&style=none&taskId=ufa9ccb88-0647-461f-b5ec-8661fe4f2b9&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900786271-2ee6465b-0bae-4d00-b5fb-fcecd117c4e8.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uabe04600&name=maven%E7%9B%B8%E5%85%B31.png&originHeight=608&originWidth=1227&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=63131&status=done&style=none&taskId=u329c66cc-ed7a-446d-b5f5-05e8f1e7d76&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900721521-721b2887-9312-4a03-bbdd-7846fe688f87.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=Mi4Tb&name=maven%E7%9B%B8%E5%85%B32.png&originHeight=208&originWidth=1269&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=23057&status=done&style=none&taskId=u10b2bde3-9ef8-4811-ae82-2acfdf5cd97&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900716287-76173ac7-33bf-4c07-b750-ff0f7f237118.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u5c2f9a49&name=IDEA%E7%9B%B8%E5%85%B31.png&originHeight=1237&originWidth=906&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=94586&status=done&style=none&taskId=u2cc17202-cbcb-4b84-9d74-998c108b00c&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900758464-a0c42272-a96a-4b49-b46a-ef9d67ea82f6.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u092eb344&name=IDEA%E7%9B%B8%E5%85%B32.png&originHeight=431&originWidth=1848&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=70304&status=done&style=none&taskId=u5c641ef4-495e-4b1e-a4ee-e3046ea5631&title=">
+<meta property="article:published_time" content="2022-04-25T14:44:30.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.943Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="dhcc-framework">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900680487-a78bccc1-1db6-48c9-be77-f6eb69c88316.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0db3a5ba&name=dhccFrame%E7%9B%B8%E5%85%B31.png&originHeight=743&originWidth=740&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=58045&status=done&style=none&taskId=ufa9ccb88-0647-461f-b5ec-8661fe4f2b9&title=">
+  
+  
+  
+  <title>dhcc-framework私服崩溃解决方案 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="dhcc-framework私服崩溃解决方案"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:44" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">dhcc-framework私服崩溃解决方案</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>DHCC-FRAMEWORK 框架的手动安装教程。</p>
+<h2 id="基础条件"><a href="#基础条件" class="headerlink" title="基础条件"></a>基础条件</h2><h2 id="下载相关文件"><a href="#下载相关文件" class="headerlink" title="下载相关文件"></a>下载相关文件</h2><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/zip/28199557/1650900672125-8ebcc766-8ee5-4201-842e-96a5829ed1b7.zip?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/zip/28199557/1650900672125-8ebcc766-8ee5-4201-842e-96a5829ed1b7.zip%22,%22name%22:%22dhccFrame.zip%22,%22size%22:4177652,%22type%22:%22application/x-zip-compressed%22,%22ext%22:%22zip%22,%22status%22:%22done%22,%22taskId%22:%22u2e8ea8c4-1599-424e-83df-7c8dfa2467f%22,%22taskType%22:%22upload%22,%22id%22:%22uac297617%22,%22card%22:%22file%22%7D">dhccFrame.zip</a><br>Maven</p>
+<ul>
+<li>(建议配置 aliyun-maven 镜像源)</li>
+<li>本地磁盘拥有 <code>D盘</code> PS:无此盘符，或者不想放在此盘符，需自行修改 Maven 的 setting.xml , 和第三步中的命令。</li>
+</ul>
+<h3 id="PS-其他版本-dhcc-framework-也可以"><a href="#PS-其他版本-dhcc-framework-也可以" class="headerlink" title="PS: 其他版本 dhcc-framework 也可以!"></a>PS: 其他版本 dhcc-framework 也可以!</h3><ul>
+<li>自己收集相应版本的 Jar 包.</li>
+<li>照猫画虎,修改第三步中的命令.</li>
+</ul>
+<h2 id="第一步-将文件dhccFrame-zip解压放到-D-盘根目录"><a href="#第一步-将文件dhccFrame-zip解压放到-D-盘根目录" class="headerlink" title="第一步. 将文件dhccFrame.zip解压放到 D 盘根目录"></a>第一步. 将文件<code>dhccFrame.zip</code>解压放到 D 盘根目录</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900680487-a78bccc1-1db6-48c9-be77-f6eb69c88316.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0db3a5ba&name=dhccFrame%E7%9B%B8%E5%85%B31.png&originHeight=743&originWidth=740&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=58045&status=done&style=none&taskId=ufa9ccb88-0647-461f-b5ec-8661fe4f2b9&title=" srcset="/img/loading.gif" lazyload alt="dhccFrame相关1.png"></p>
+<h2 id="第二步-并切换到相应目录"><a href="#第二步-并切换到相应目录" class="headerlink" title="第二步. 并切换到相应目录"></a>第二步. 并切换到相应目录</h2><p>请确认自己的 Maven 的 Jar 包的下载路径为 <code>D:\.m2\repository\</code>,<br>如果不是需要自行修改 <code>maven/conf/setting.xml</code> 中 的 <code>localRepository</code> .</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!-- 在`setting.xml`找到此位置 --&gt;<br>&lt;!-- localRepository<br> | The path to the <span class="hljs-built_in">local</span> repository maven will use to store artifacts.<br> |<br> | Default: <span class="hljs-variable">$&#123;user.home&#125;</span>/.m2/repository<br>&lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;<br>--&gt;<br>&lt;!-- 增加下面这行 --&gt;<br>&lt;localRepository&gt;填写自己的Maven的Jar包的下载路径.&lt;/localRepository&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900786271-2ee6465b-0bae-4d00-b5fb-fcecd117c4e8.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uabe04600&name=maven%E7%9B%B8%E5%85%B31.png&originHeight=608&originWidth=1227&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=63131&status=done&style=none&taskId=u329c66cc-ed7a-446d-b5f5-05e8f1e7d76&title=" srcset="/img/loading.gif" lazyload alt="maven相关1.png"></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">mvn install:install-file -Dfile=your-artifact-1.0.jar \<br>                         [-DpomFile=your-pom.xml] \<br>                         [-Dsources=src.jar] \<br>                         [-Djavadoc=apidocs.jar] \<br>                         [-DgroupId=org.some.group] \<br>                         [-DartifactId=your-artifact] \<br>                         [-Dversion=1.0] \<br>                         [-Dpackaging=jar] \<br>                         [-Dclassifier=sources] \<br>                         [-DgeneratePom=<span class="hljs-literal">true</span>] \<br>                         [-DcreateChecksum=<span class="hljs-literal">true</span>]<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>-Dfile：jar 包所在本地的具体路径</li>
+<li>-DgroupId：项目组织唯一的标识符，实际对应 JAVA 的包的结构</li>
+<li>-DartifactId：项目的唯一的标识符，实际对应项目的名称，就是项目根目录的名称</li>
+<li>-Dversion：版本号</li>
+<li>-Dpackaging：打包的类型</li>
+<li>-DpomFile：POM 文件</li>
+</ul>
+<h3 id="第三步：在-maven-x2F-bin-下-运行以下命令"><a href="#第三步：在-maven-x2F-bin-下-运行以下命令" class="headerlink" title="第三步：在 maven&#x2F;bin 下, 运行以下命令"></a>第三步：在 maven&#x2F;bin 下, 运行以下命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-parent-4.7.0.pom  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-parent  -Dversion=4.7.0  -Dpackaging=pom<br>mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-4.7.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core  -Dversion=4.7.0  -Dpackaging=jar -DpomFile=D:\dhccFrame\dhcc-core-4.7.0.pom<br>mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-log-4.7.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-log  -Dversion=4.7.0  -Dpackaging=jar  -DpomFile=D:\dhccFrame\dhcc-core-log-4.7.0.pom<br>mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-mybatis-4.7.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-mybatis  -Dversion=4.7.0  -Dpackaging=jar  -DpomFile=D:\dhccFrame\dhcc-core-mybatis-4.7.0.pom<br>mvn install:install-file -Dfile=D:\dhccFrame\mybatis-plus-generator-ext-4.7.0.jar  -DgroupId=com.baomidou  -DartifactId=mybatis-plus-generator-ext  -Dversion=4.7.0  -Dpackaging=jar<br>mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-um-4.7.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-um  -Dversion=4.7.0  -Dpackaging=jar  -DpomFile=D:\dhccFrame\dhcc-core-um-4.7.0.pom<br>mvn install:install-file -Dfile=D:\dhccFrame\dhcc-core-cxf-webservice-4.7.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-cxf-webservice  -Dversion=4.7.0  -Dpackaging=jar  -DpomFile=D:\dhccFrame\dhcc-core-cxf-webservice-4.7.0.pom<br>mvn install:install-file -Dfile=D:\dhccFrame\ojdbc7-12.1.0.2.jar  -DgroupId=com.oracle  -DartifactId=ojdbc7  -Dversion=12.1.0.2  -Dpackaging=jar<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mvn install:install-file <span class="hljs-attribute">-Dfile</span>=D:\dhccFrame\spire.office.free-3.9.0.jar  <span class="hljs-attribute">-DgroupId</span>=e-iceblue  <span class="hljs-attribute">-DartifactId</span>=spire.office.free  <span class="hljs-attribute">-Dversion</span>=3.9.0  <span class="hljs-attribute">-Dpackaging</span>=jar <span class="hljs-attribute">-DpomFile</span>=D:\dhccFrame4.7\spire.office.free-3.9.0.pom<br></code></pre></td></tr></table></figure>
+
+<h3 id="第四步：运行完成提示-8-个-则为成功"><a href="#第四步：运行完成提示-8-个-则为成功" class="headerlink" title="第四步：运行完成提示 8 个,则为成功!"></a>第四步：运行完成提示 8 个,则为成功!</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900721521-721b2887-9312-4a03-bbdd-7846fe688f87.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=Mi4Tb&name=maven%E7%9B%B8%E5%85%B32.png&originHeight=208&originWidth=1269&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=23057&status=done&style=none&taskId=u10b2bde3-9ef8-4811-ae82-2acfdf5cd97&title=" srcset="/img/loading.gif" lazyload alt="maven相关2.png"></p>
+<h2 id="其他版本示例-3-5"><a href="#其他版本示例-3-5" class="headerlink" title="其他版本示例 3.5"></a>其他版本示例 3.5</h2><h3 id="dhcc-framework-3-5-示例文件"><a href="#dhcc-framework-3-5-示例文件" class="headerlink" title="dhcc-framework 3.5 示例文件"></a>dhcc-framework 3.5 示例文件</h3><p>暂无</p>
+<h3 id="dhcc-framework-3-5-示例命令"><a href="#dhcc-framework-3-5-示例命令" class="headerlink" title="dhcc-framework 3.5 示例命令"></a>dhcc-framework 3.5 示例命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mvn install:install-file -Dfile=D:\dhccFrame3.5\dhcc-core-parent-3.5.0.pom  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core-parent  -Dversion=3.5.0  -Dpackaging=pom<br>mvn install:install-file -Dfile=D:\dhccFrame3.5\dhcc-core-3.5.0.jar  -DgroupId=com.dhcc.framework  -DartifactId=dhcc-core  -Dversion=3.5.0  -Dpackaging=jar -Dpomfile=D:\dhccFrame3.5\dhcc-core-3.5.0.pom<br></code></pre></td></tr></table></figure>
+
+<h3 id="第五步：一切准备就绪"><a href="#第五步：一切准备就绪" class="headerlink" title="第五步：一切准备就绪"></a>第五步：一切准备就绪</h3><h4 id="在-IDEA-中打开相关项目"><a href="#在-IDEA-中打开相关项目" class="headerlink" title="在 IDEA 中打开相关项目"></a>在 IDEA 中打开相关项目</h4><h5 id="双击-package-PS-红色波浪线部分-貌似不影响使用"><a href="#双击-package-PS-红色波浪线部分-貌似不影响使用" class="headerlink" title="双击 package  PS: (红色波浪线部分 貌似不影响使用)"></a>双击 <code>package</code>  PS: (红色波浪线部分 貌似不影响使用)</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900716287-76173ac7-33bf-4c07-b750-ff0f7f237118.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u5c2f9a49&name=IDEA%E7%9B%B8%E5%85%B31.png&originHeight=1237&originWidth=906&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=94586&status=done&style=none&taskId=u2cc17202-cbcb-4b84-9d74-998c108b00c&title=" srcset="/img/loading.gif" lazyload alt="IDEA相关1.png"></p>
+<h5 id="出现以下提示即为成功"><a href="#出现以下提示即为成功" class="headerlink" title="出现以下提示即为成功!"></a>出现以下提示即为成功!</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900758464-a0c42272-a96a-4b49-b46a-ef9d67ea82f6.png#clientId=u56076083-47c5-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u092eb344&name=IDEA%E7%9B%B8%E5%85%B32.png&originHeight=431&originWidth=1848&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=70304&status=done&style=none&taskId=u5c641ef4-495e-4b1e-a4ee-e3046ea5631&title=" srcset="/img/loading.gif" lazyload alt="IDEA相关2.png"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="category-chain-item">问题汇总</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/dhcc-framework/">#dhcc-framework</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>dhcc-framework私服崩溃解决方案</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/dhcc-framework私服崩溃解决方案/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Docker%201.%20%E5%AE%89%E8%A3%85/" title="Docker 1. 安装">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker 1. 安装</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9%E5%80%8D%E9%80%9F%E6%92%AD%E6%94%BE/" title="哔哩哔哩倍速播放">
+                        <span class="hidden-mobile">哔哩哔哩倍速播放</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

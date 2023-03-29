@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="理解 SpringApplicationPDF 版本:第三节 理解 SpringApplication.pdf SpringApplication 定义 : Spring 应用引导类 , 提供便利的自定义行为方法 场景 : 嵌入式 Web 应用和非 Web 应用 运行 : SpringApplication#run(String...)  SpringApplication 基本使用SpringA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot 3. 理解 SpringApplication">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/Spring%20Boot%203.%20%E7%90%86%E8%A7%A3%20SpringApplication/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="理解 SpringApplicationPDF 版本:第三节 理解 SpringApplication.pdf SpringApplication 定义 : Spring 应用引导类 , 提供便利的自定义行为方法 场景 : 嵌入式 Web 应用和非 Web 应用 运行 : SpringApplication#run(String...)  SpringApplication 基本使用SpringA">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-25T14:47:40.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.931Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Spring Boot 3. 理解 SpringApplication - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spring Boot 3. 理解 SpringApplication"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:47" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring Boot 3. 理解 SpringApplication</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>理解 SpringApplication<br>PDF 版本:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/28199557/1650898730766-3591ea75-dc65-47e8-aade-78fb84438735.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/pdf/28199557/1650898730766-3591ea75-dc65-47e8-aade-78fb84438735.pdf%22,%22name%22:%22%E7%AC%AC%E4%B8%89%E8%8A%82+%E7%90%86%E8%A7%A3+SpringApplication.pdf%22,%22size%22:323090,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22status%22:%22done%22,%22taskId%22:%22u9589ead7-a380-4900-bbb7-1927af64d41%22,%22taskType%22:%22upload%22,%22id%22:%22u31c7730c%22,%22card%22:%22file%22%7D">第三节 理解 SpringApplication.pdf</a></p>
+<h2 id="SpringApplication"><a href="#SpringApplication" class="headerlink" title="SpringApplication"></a><code>SpringApplication</code></h2><ul>
+<li>定义 : Spring 应用引导类 , 提供便利的自定义行为方法</li>
+<li>场景 : 嵌入式 Web 应用和非 Web 应用</li>
+<li>运行 : <code>SpringApplication#run(String...)</code></li>
+</ul>
+<h2 id="SpringApplication-基本使用"><a href="#SpringApplication-基本使用" class="headerlink" title="SpringApplication 基本使用"></a><code>SpringApplication</code> 基本使用</h2><h3 id="SpringApplication-运行"><a href="#SpringApplication-运行" class="headerlink" title="SpringApplication 运行"></a><code>SpringApplication</code> 运行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">SpringApplication.run(SpringBootApplication.class,args)<br></code></pre></td></tr></table></figure>
+
+<h3 id="自定义-SpringApplication"><a href="#自定义-SpringApplication" class="headerlink" title="自定义 SpringApplication"></a>自定义 <code>SpringApplication</code></h3><h4 id="通过-SpringApplication-API-调整"><a href="#通过-SpringApplication-API-调整" class="headerlink" title="通过 SpringApplication API 调整"></a>通过 <code>SpringApplication</code> API 调整</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">SpringApplication</span> <span class="hljs-variable">springApplication</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SpringApplication</span>(SpringApplicationApplication.class);<br>springApplication.setBannerMode(Banner.Mode.CONSOLE);<br>springApplication.setWebApplicationType(WebApplicationType.NONE);<br>springApplication.setAdditionalProfiles(<span class="hljs-string">&quot;prod&quot;</span>);<br>springApplication.setHeadless(<span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="通过-SpringApplicationBuilder-API-调整"><a href="#通过-SpringApplicationBuilder-API-调整" class="headerlink" title="通过 SpringApplicationBuilder API 调整"></a>通过 <code>SpringApplicationBuilder</code> API 调整</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">SpringApplicationBuilder</span>(SpringApplicationApplication.class)<br>        .bannerMode(Banner.Mode.CONSOLE)<br>        .web(WebApplicationType.NONE)<br>        .profiles(<span class="hljs-string">&quot;prod&quot;</span>)<br>        .headless(<span class="hljs-literal">true</span>)<br>        .run(args);<br></code></pre></td></tr></table></figure>
+
+<h2 id="SpringApplication-准备阶段"><a href="#SpringApplication-准备阶段" class="headerlink" title="SpringApplication 准备阶段"></a><code>SpringApplication</code> 准备阶段</h2><h3 id="配置-Spring-Boot-Bean-来源"><a href="#配置-Spring-Boot-Bean-来源" class="headerlink" title="配置 Spring Boot Bean 来源"></a>配置 Spring Boot Bean 来源</h3><p>Java 配置 Class 或 XML 上下文配置文件集合 , 用于 Spring Boot <code>BeanDefinitionLoader</code> 读取 , 并且将配置源解析加载为 Spring Bean 定义</p>
+<ul>
+<li>数量 : 一个或多个以上</li>
+</ul>
+<h4 id="Java-配置-Class"><a href="#Java-配置-Class" class="headerlink" title="Java 配置 Class"></a>Java 配置 Class</h4><p>用于 Spring 注解驱动中 Java 配置类 , 大多数情况是 Spring 模式注解所标志的类 , 如 <code>@Configuration</code></p>
+<h4 id="XML-上下文配置文件"><a href="#XML-上下文配置文件" class="headerlink" title="XML 上下文配置文件"></a>XML 上下文配置文件</h4><p>用于 Spring 传统配置驱动中的 XML 文件</p>
+<h3 id="推断-Web-应用类型"><a href="#推断-Web-应用类型" class="headerlink" title="推断 Web 应用类型"></a>推断 Web 应用类型</h3><p>根据当前应用 ClassPath 中是否存在相关实现类来推断 Web 应用的类型 , 包括 :</p>
+<ul>
+<li>Web Reactive： <code>WebApplicationType.REACTIVE</code></li>
+<li>Web Servlet：<code>WebApplicationType.SERVLET</code></li>
+<li>非 Web： <code>WebApplicationType.NONE</code></li>
+</ul>
+<blockquote>
+<p>参考方法： <code>org.springframework.boot.SpringApplication#deduceFromClasspath</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> WebApplicationType <span class="hljs-title function_">deduceFromClasspath</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">if</span> (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, <span class="hljs-literal">null</span>) &amp;&amp; !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, <span class="hljs-literal">null</span>)<br>			&amp;&amp; !ClassUtils.isPresent(JERSEY_INDICATOR_CLASS, <span class="hljs-literal">null</span>)) &#123;<br>		<span class="hljs-keyword">return</span> WebApplicationType.REACTIVE;<br>	&#125;<br>	<span class="hljs-keyword">for</span> (String className : SERVLET_INDICATOR_CLASSES) &#123;<br>		<span class="hljs-keyword">if</span> (!ClassUtils.isPresent(className, <span class="hljs-literal">null</span>)) &#123;<br>			<span class="hljs-keyword">return</span> WebApplicationType.NONE;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> WebApplicationType.SERVLET;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="推断-引导类-Main-Class"><a href="#推断-引导类-Main-Class" class="headerlink" title="推断 引导类 (Main Class)"></a>推断 引导类 (Main Class)</h3><p>根据 Main 线程执行堆栈判断实际的引导类</p>
+<blockquote>
+<p>参考方法： <code>org.springframework.boot.SpringApplication#deduceMainApplicationClass</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Class&lt;?&gt; deduceMainApplicationClass() &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		StackTraceElement[] stackTrace = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>().getStackTrace();<br>		<span class="hljs-keyword">for</span> (StackTraceElement stackTraceElement : stackTrace) &#123;<br>			<span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;main&quot;</span>.equals(stackTraceElement.getMethodName())) &#123;<br>				<span class="hljs-keyword">return</span> Class.forName(stackTraceElement.getClassName());<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">catch</span> (ClassNotFoundException ex) &#123;<br>		<span class="hljs-comment">// Swallow and continue</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="加载-应用上下文初始化器-ApplicationContextInitializer"><a href="#加载-应用上下文初始化器-ApplicationContextInitializer" class="headerlink" title="加载 应用上下文初始化器 (ApplicationContextInitializer)"></a>加载 应用上下文初始化器 (<code>ApplicationContextInitializer</code>)</h3><p>利用 Spring 工厂加载机制，实例化 <code>ApplicationContextInitializer</code> 实现类，并排序对象集合。</p>
+<blockquote>
+<ul>
+<li>实现</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>技术</li>
+<li>实现类：<code>org.springframework.core.io.support.SpringFactoriesLoader</code></li>
+<li>配置资源： <code>META-INF/spring.factories</code></li>
+<li>排序： <code>AnnotationAwareOrderComparator#sort</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> &lt;T&gt; Collection&lt;T&gt; <span class="hljs-title function_">getSpringFactoriesInstances</span><span class="hljs-params">(Class&lt;T&gt; type, Class&lt;?&gt;[] parameterTypes, Object... args)</span> &#123;<br>	<span class="hljs-type">ClassLoader</span> <span class="hljs-variable">classLoader</span> <span class="hljs-operator">=</span> getClassLoader();<br>	<span class="hljs-comment">// Use names and ensure unique to protect against duplicates</span><br>	Set&lt;String&gt; names = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashSet</span>&lt;&gt;(SpringFactoriesLoader.loadFactoryNames(type, classLoader));<br>	List&lt;T&gt; instances = createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names);<br>	AnnotationAwareOrderComparator.sort(instances);<br>	<span class="hljs-keyword">return</span> instances;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="加载应用事件监听器-ApplicationListener"><a href="#加载应用事件监听器-ApplicationListener" class="headerlink" title="加载应用事件监听器 (ApplicationListener)"></a>加载应用事件监听器 (<code>ApplicationListener</code>)</h3><p>利用 Spring 工厂加载机制，实例化 <code>ApplicationListener</code> 实现类，并排序对象集合</p>
+<h2 id="SpringApplication-1"><a href="#SpringApplication-1" class="headerlink" title="SpringApplication"></a>SpringApplication</h2><h3 id="加载-SpringApplication-运行监听器（-SpringApplicationRunListeners-）"><a href="#加载-SpringApplication-运行监听器（-SpringApplicationRunListeners-）" class="headerlink" title="加载 SpringApplication 运行监听器（ SpringApplicationRunListeners ）"></a>加载 <code>SpringApplication</code> 运行监听器（ <code>SpringApplicationRunListeners</code> ）</h3><p>利用 Spring 工厂加载机制，读取 <code>SpringApplicationRunListener</code> 对象集合，并且封装到组合类 <code>SpringApplicationRunListeners</code></p>
+<h3 id="运行-SpringApplication-运行监听器（-SpringApplicationRunListeners-）"><a href="#运行-SpringApplication-运行监听器（-SpringApplicationRunListeners-）" class="headerlink" title="运行 SpringApplication 运行监听器（ SpringApplicationRunListeners ）"></a>运行 <code>SpringApplication</code> 运行监听器（ <code>SpringApplicationRunListeners</code> ）</h3><p><code>SpringApplicationRunListener</code> 监听多个运行状态方法：</p>
+<table>
+<thead>
+<tr>
+<th>监听方法</th>
+<th>阶段说明</th>
+<th>Spring Boot 起始版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>starting()</code></td>
+<td>Spring 应用刚启动</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>environmentPrepared(ConfigurableEnvironment)</code></td>
+<td><code>ConfigurableEnvironment</code></td>
+<td></td>
+</tr>
+<tr>
+<td>准备妥当，允许将其调整</td>
+<td>1.0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>contextPrepared(ConfigurableApplicationContext)</code></td>
+<td><code>ConfigurableApplicationContext</code></td>
+<td></td>
+</tr>
+<tr>
+<td>准备妥当，允许将其调整</td>
+<td>1.0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>contextLoaded(ConfigurableApplicationContext)</code></td>
+<td><code>ConfigurableApplicationContext</code></td>
+<td></td>
+</tr>
+<tr>
+<td>已装载，但仍未启动</td>
+<td>1.0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>started(ConfigurableApplicationContext)</code></td>
+<td>ConfigurableApplicationContext 已启动，此时 Spring Bean 已初始化完成</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td><code>running(ConfigurableApplicationContext)</code></td>
+<td>Spring 应用正在运行</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td><code>failed(ConfigurableApplicationContext,Throwable)</code></td>
+<td>Spring 应用运行失败</td>
+<td>2.0</td>
+</tr>
+</tbody></table>
+<h3 id="监听-Spring-Boot-事件-x2F-Spring-事件"><a href="#监听-Spring-Boot-事件-x2F-Spring-事件" class="headerlink" title="监听 Spring Boot 事件 &#x2F; Spring 事件"></a>监听 Spring Boot 事件 &#x2F; Spring 事件</h3><p>Spring Boot 通过 <code>SpringApplicationRunListener</code> 的实现类 <code>EventPublishingRunListener</code> 利用 Spring Framework 事件 API ，广播 Spring Boot 事件。</p>
+<h4 id="Spring-Framework-事件-x2F-监听器编程模型"><a href="#Spring-Framework-事件-x2F-监听器编程模型" class="headerlink" title="Spring Framework 事件&#x2F;监听器编程模型"></a>Spring Framework 事件&#x2F;监听器编程模型</h4><ul>
+<li>Spring 应用事件<ul>
+<li>普通应用事件： <code>ApplicationEvent</code></li>
+<li>应用上下文事件： <code>ApplicationContextEvent</code></li>
+</ul>
+</li>
+<li>Spring 应用监听器<ul>
+<li>接口编程模型： <code>ApplicationListener</code></li>
+<li>注解编程模型： <code>@EventListener</code></li>
+</ul>
+</li>
+<li>Spring 应用事广播器<ul>
+<li>接口：<code>ApplicationEventMulticaster</code></li>
+<li>实现类： <code>SimpleApplicationEventMulticaster</code><ul>
+<li>执行模式：同步或异步</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="EventPublishingRunListener-监听方法与-Spring-Boot-事件对应关系"><a href="#EventPublishingRunListener-监听方法与-Spring-Boot-事件对应关系" class="headerlink" title="EventPublishingRunListener 监听方法与 Spring Boot 事件对应关系"></a><code>EventPublishingRunListener</code> 监听方法与 Spring Boot 事件对应关系</h4><table>
+<thead>
+<tr>
+<th>监听方法</th>
+<th>Spring Boot 事件</th>
+<th>Spring Boot 起始版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>starting()</code></td>
+<td><code>ApplicationStartingEvent</code></td>
+<td>1.5</td>
+</tr>
+<tr>
+<td><code>environmentPrepared(ConfigurableEnvironment)</code></td>
+<td><code>ApplicationEnvironmentPreparedEvent</code></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>contextPrepared(ConfigurableApplicationContext)</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>contextLoaded(ConfigurableApplicationContext)</code></td>
+<td><code>ApplicationPreparedEvent</code></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>started(ConfigurableApplicationContext)</code></td>
+<td><code>ApplicationStartedEvent</code></td>
+<td>2.0</td>
+</tr>
+<tr>
+<td><code>running(ConfigurableApplicationContext)</code></td>
+<td><code>ApplicationReadyEvent</code></td>
+<td>2.0</td>
+</tr>
+<tr>
+<td><code>failed(ConfigurableApplicationContext,Throwable)</code></td>
+<td><code>ApplicationFailedEvent</code></td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+<h3 id="创建-Spring-应用上下文（-ConfigurableApplicationContext-）"><a href="#创建-Spring-应用上下文（-ConfigurableApplicationContext-）" class="headerlink" title="创建 Spring 应用上下文（ ConfigurableApplicationContext ）"></a>创建 Spring 应用上下文（ <code>ConfigurableApplicationContext</code> ）</h3><p>根据准备阶段的推断 Web 应用类型创建对应的 <code>ConfigurableApplicationContext</code> 实例：</p>
+<ul>
+<li>Web Reactive： <code>AnnotationConfigReactiveWebServerApplicationContext</code></li>
+<li>Web Servlet： <code>AnnotationConfigServletWebServerApplicationContext</code></li>
+<li>非 Web： <code>AnnotationConfigApplicationContext</code></li>
+</ul>
+<h3 id="创建-Environment"><a href="#创建-Environment" class="headerlink" title="创建 Environment"></a>创建 <code>Environment</code></h3><p>根据准备阶段的推断 Web 应用类型创建对应的 <code>ConfigurableEnvironment</code> 实例：</p>
+<ul>
+<li>Web Reactive： <code>StandardEnvironment</code></li>
+<li>Web Servlet： <code>StandardServletEnvironment</code></li>
+<li>非 Web： <code>StandardEnvironment</code></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3SpringBoot/" class="category-chain-item">深入理解SpringBoot</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/spring-boot/">#spring boot</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Spring Boot 3. 理解 SpringApplication</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/Spring Boot 3. 理解 SpringApplication/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Spring%20Boot%204.%20Web%20MVC%20%E6%A0%B8%E5%BF%83/" title="Spring Boot 4. Web MVC 核心">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring Boot 4. Web MVC 核心</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Spring%20Boot%202%20%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%97%AE%E9%A2%98/" title="Spring Boot 2 单元测试多线程问题">
+                        <span class="hidden-mobile">Spring Boot 2 单元测试多线程问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

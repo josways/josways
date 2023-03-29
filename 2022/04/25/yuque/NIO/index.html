@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="java.nioNIO.xmind 1、Java NIO 简介Java NIO（New IO）是从 Java 1.4 版本开始引入的一个新的 IO API，可以替代标准的 Java IO API。NIO 与原来的 IO 有同样的作用和目的，但是使用的方式完全不同，NIO 支持面向缓冲区的、基于通道的 IO 操作。NIO 将以更加高效的方式进行文件的读写操作。 2、Java NIO 与 IO 的主要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NIO">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/NIO/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="java.nioNIO.xmind 1、Java NIO 简介Java NIO（New IO）是从 Java 1.4 版本开始引入的一个新的 IO API，可以替代标准的 Java IO API。NIO 与原来的 IO 有同样的作用和目的，但是使用的方式完全不同，NIO 支持面向缓冲区的、基于通道的 IO 操作。NIO 将以更加高效的方式进行文件的读写操作。 2、Java NIO 与 IO 的主要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-25T14:46:45.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.934Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="nio">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>NIO - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="NIO"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:46" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">NIO</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>java.nio<br><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/xmind/28199557/1650900937005-272d1fde-9b02-44a9-a94b-5f0f836461c2.xmind?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/xmind/28199557/1650900937005-272d1fde-9b02-44a9-a94b-5f0f836461c2.xmind%22,%22name%22:%22NIO.xmind%22,%22size%22:4859164,%22type%22:%22%22,%22ext%22:%22xmind%22,%22status%22:%22done%22,%22taskId%22:%22u4ca91284-6480-407a-958a-231546ec002%22,%22taskType%22:%22transfer%22,%22id%22:%22u2868a093%22,%22card%22:%22file%22%7D">NIO.xmind</a></p>
+<h2 id="1、Java-NIO-简介"><a href="#1、Java-NIO-简介" class="headerlink" title="1、Java NIO 简介"></a>1、Java NIO 简介</h2><p>Java NIO（New IO）是从 Java 1.4 版本开始引入的<br>一个新的 IO API，可以替代标准的 Java IO API。<br>NIO 与原来的 IO 有同样的作用和目的，但是使用<br>的方式完全不同，NIO 支持面向缓冲区的、基于<br>通道的 IO 操作。NIO 将以更加高效的方式进行文<br>件的读写操作。</p>
+<h2 id="2、Java-NIO-与-IO-的主要区别"><a href="#2、Java-NIO-与-IO-的主要区别" class="headerlink" title="2、Java NIO 与 IO 的主要区别"></a>2、Java NIO 与 IO 的主要区别</h2><p>IO | NIO<br>面向流(Stream Oriented) | 面向缓冲区(Buffer Oriented)<br>阻塞 IO(Blocking IO) | 非阻塞 IO(Non Blocking IO)<br>(无) | 选择器(Selectors)</p>
+<h2 id="3、缓冲区-Buffer-和通道-Channel"><a href="#3、缓冲区-Buffer-和通道-Channel" class="headerlink" title="3、缓冲区(Buffer)和通道(Channel)"></a>3、缓冲区(Buffer)和通道(Channel)</h2><p>Java NIO 系统的核心在于：通道(Channel)和缓冲区 (Buffer)。通道表示打开到 IO 设备(例如：文件、 套接字)的连接。若需要使用 NIO 系统，需要获取 用于连接 IO 设备的通道以及用于容纳数据的缓冲 区。然后操作缓冲区，对数据进行处理。</p>
+<h3 id="简而言之，Channel-负责传输，-Buffer-负责存储"><a href="#简而言之，Channel-负责传输，-Buffer-负责存储" class="headerlink" title="简而言之，Channel 负责传输， Buffer 负责存储"></a>简而言之，Channel 负责传输， Buffer 负责存储</h3><h3 id="缓冲区"><a href="#缓冲区" class="headerlink" title="缓冲区"></a>缓冲区</h3><p>缓冲区（Buffer）：一个用于特定基本数据类 型的容器。由 java.nio 包定义的，所有缓冲区 都是 Buffer 抽象类的子类。<br>Java NIO 中的 Buffer 主要用于与 NIO 通道进行 交互，数据是从通道读入缓冲区，从缓冲区写 入通道中的 。<br>Buffer 就像一个数组，可以保存多个相同类型的数据。根 据数据类型不同(boolean 除外) ，有以下 Buffer 常用子类：<br>ByteBuffer<br>CharBuffer<br>ShortBuffer<br>IntBuffer<br>LongBuffer<br>FloatBuffer<br>DoubleBuffer<br>上述 Buffer 类 他们都采用相似的方法进行管理数据，只是各自 管理的数据类型不同而已。都是通过如下方法获取一个 Buffer 对象：<br>static XxxBuffer allocate(int capacity) : 创建一个容量为 capacity 的 XxxBuffer 对象</p>
+<ul>
+<li>缓冲区的基本属性<br>Buffer 中的重要概念：<br>容量 (capacity) ：表示 Buffer 最大数据容量，缓冲区容量不能为负，并且创 建后不能更改。<br>限制 (limit)：第一个不应该读取或写入的数据的索引，即位于 limit 后的数据 不可读写。缓冲区的限制不能为负，并且不能大于其容量。<br>位置 (position)：下一个要读取或写入的数据的索引。缓冲区的位置不能为 负，并且不能大于其限制<br>标记 (mark)与重置 (reset)：标记是一个索引，通过 Buffer 中的 mark() 方法 指定 Buffer 中一个特定的 position，之后可以通过调用 reset() 方法恢复到这 个 position.<br>标记、位置、限制、容量遵守以下不变式： 0 &lt;&#x3D; mark &lt;&#x3D; position &lt;&#x3D; limit &lt;&#x3D; capacity</li>
+<li>Buffer 的常用方法</li>
+<li>缓冲区的数据操作<br>Buffer 所有子类提供了两个用于数据操作的方法：get() 与 put() 方法<br>获取 Buffer 中的数据<br>get() ：读取单个字节<br>get(byte[] dst)：批量读取多个字节到 dst 中<br>get(int index)：读取指定索引位置的字节(不会移动 position)<br>放入数据到 Buffer 中<br>put(byte b)：将给定单个字节写入缓冲区的当前位置<br>put(byte[] src)：将 src 中的字节写入缓冲区的当前位置<br>put(int index, byte b)：将指定字节写入缓冲区的索引位置(不会移动 position)</li>
+<li>直接与非直接缓冲区<br>字节缓冲区要么是直接的，要么是非直接的。如果为直接字节缓冲区，则 Java 虚拟机会尽最大努力直接在 此缓冲区上执行本机 I&#x2F;O 操作。也就是说，在每次调用基础操作系统的一个本机 I&#x2F;O 操作之前（或之后）， 虚拟机都会尽量避免将缓冲区的内容复制到中间缓冲区中（或从中间缓冲区中复制内容）。<br>直接字节缓冲区可以通过调用此类的 allocateDirect() 工厂方法来创建。此方法返回的缓冲区进行分配和取消 分配所需成本通常高于非直接缓冲区。直接缓冲区的内容可以驻留在常规的垃圾回收堆之外，因此，它们对 应用程序的内存需求量造成的影响可能并不明显。所以，建议将直接缓冲区主要分配给那些易受基础系统的 本机 I&#x2F;O 操作影响的大型、持久的缓冲区。一般情况下，最好仅在直接缓冲区能在程序性能方面带来明显好 处时分配它们。<br>直接字节缓冲区还可以通过 FileChannel 的 map() 方法 将文件区域直接映射到内存中来创建。该方法返回 MappedByteBuffer 。Java 平台的实现有助于通过 JNI 从本机代码创建直接字节缓冲区。如果以上这些缓冲区 中的某个缓冲区实例指的是不可访问的内存区域，则试图访问该区域不会更改该缓冲区的内容，并且将会在 访问期间或稍后的某个时间导致抛出不确定的异常。<br>字节缓冲区是直接缓冲区还是非直接缓冲区可通过调用其 isDirect() 方法来确定。提供此方法是为了能够在 性能关键型代码中执行显式缓冲区管理。<ul>
+<li>非直接缓冲区</li>
+<li>直接缓冲区</li>
+</ul>
+</li>
+</ul>
+<h3 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h3><p>通道（Channel）：由 java.nio.channels 包定义 的。Channel 表示 IO 源与目标打开的连接。 Channel 类似于传统的“流”。只不过 Channel 本身不能直接访问数据，Channel 只能与 Buffer 进行交互。<br>Java 为 Channel 接口提供的最主要实现类如下：<br>FileChannel：用于读取、写入、映射和操作文件的通道。<br>DatagramChannel：通过 UDP 读写网络中的数据通道。<br>SocketChannel：通过 TCP 读写网络中的数据。<br>ServerSocketChannel：可以监听新进来的 TCP 连接，对每一个新进来 的连接都会创建一个 SocketChannel。</p>
+<ul>
+<li>通道</li>
+<li>通道</li>
+<li>通道</li>
+<li>获取通道<br>获取通道的一种方式是对支持通道的对象调用 getChannel() 方法。支持通道的类如下：<br>FileInputStream<br>FileOutputStream<br>RandomAccessFile<br>DatagramSocket<br>Socket<br>ServerSocket<br>获取通道的其他方式是使用 Files 类的静态方法 newByteChannel() 获 取字节通道。或者通过通道的静态方法 open() 打开并返回指定通道。</li>
+<li>通道的数据传输</li>
+<li>分散(Scatter)和聚集(Gather)<ul>
+<li>分散读取（Scattering Reads）<br>是指从 Channel 中读取的数据“分 散”到多个 Buffer 中。<br>注意：按照缓冲区的顺序，从 Channel 中读取的数据依次将 Buffer 填满。</li>
+<li>聚集写入（Gathering Writes）<br>是指将多个 Buffer 中的数据“聚集” 到 Channel。<br>注意：按照缓冲区的顺序，写入 position 和 limit 之间的数据到 Channel 。</li>
+</ul>
+</li>
+<li>transferFrom()<br>将数据从源通道传输到其他 Channel 中：</li>
+<li>transferTo()<br>将数据从源通道传输到其他 Channel 中：</li>
+</ul>
+<h2 id="4、文件通道-FileChannel"><a href="#4、文件通道-FileChannel" class="headerlink" title="4、文件通道(FileChannel)"></a>4、文件通道(FileChannel)</h2><h3 id="FileChannel-的常用方法"><a href="#FileChannel-的常用方法" class="headerlink" title="FileChannel 的常用方法"></a>FileChannel 的常用方法</h3><h2 id="5、NIO-的非阻塞式网络通信"><a href="#5、NIO-的非阻塞式网络通信" class="headerlink" title="5、NIO 的非阻塞式网络通信"></a>5、NIO 的非阻塞式网络通信</h2><p>传统的 IO 流都是阻塞式的。也就是说，当一个线程调用 read() 或 write() 时，该线程被阻塞，直到有一些数据被读取或写入，该线程在此期间不 能执行其他任务。因此，在完成网络通信进行 IO 操作时，由于线程会 阻塞，所以服务器端必须为每个客户端都提供一个独立的线程进行处理， 当服务器端需要处理大量客户端时，性能急剧下降。<br>Java NIO 是非阻塞模式的。当线程从某通道进行读写数据时，若没有数 据可用时，该线程可以进行其他任务。线程通常将非阻塞 IO 的空闲时 间用于在其他通道上执行 IO 操作，所以单独的线程可以管理多个输入 和输出通道。因此，NIO 可以让服务器端使用一个或有限几个线程来同 时处理连接到服务器端的所有客户端。</p>
+<h3 id="1、选择器-Selector"><a href="#1、选择器-Selector" class="headerlink" title="1、选择器(Selector)"></a>1、选择器(Selector)</h3><p>选择器（Selector） 是 SelectableChannle 对象的多路复用器，Selector 可 以同时监控多个 SelectableChannel 的 IO 状况，也就是说，利用 Selector 可使一个单独的线程管理多个 Channel。Selector 是非阻塞 IO 的核心。</p>
+<ul>
+<li>选择器（Selector）的应用<ul>
+<li>子主题 1</li>
+<li>子主题 2</li>
+</ul>
+</li>
+<li>SelectionKey<ul>
+<li>子主题 1</li>
+<li>子主题 2</li>
+</ul>
+</li>
+<li>Selector 的常用方法</li>
+</ul>
+<h3 id="2、SocketChannel、ServerSocketChannel、DatagramChannel"><a href="#2、SocketChannel、ServerSocketChannel、DatagramChannel" class="headerlink" title="2、SocketChannel、ServerSocketChannel、DatagramChannel"></a>2、SocketChannel、ServerSocketChannel、DatagramChannel</h3><ul>
+<li>SocketChannel<br>Java NIO 中的 SocketChannel 是一个连接到 TCP 网 络套接字的通道。<br>操作步骤：<br>打开 SocketChannel<br>读写数据<br>关闭 SocketChannel<br>Java NIO 中的 ServerSocketChannel 是一个可以 监听新进来的 TCP 连接的通道，就像标准 IO 中 的 ServerSocket 一样。</li>
+<li>DatagramChannel<br>Java NIO 中的 DatagramChannel 是一个能收发 UDP 包的通道。<br>操作步骤：<br>打开 DatagramChannel<br>接收&#x2F;发送数据</li>
+</ul>
+<h2 id="6、管道-Pipe"><a href="#6、管道-Pipe" class="headerlink" title="6、管道(Pipe)"></a>6、管道(Pipe)</h2><p>Java NIO 管道是 2 个线程之间的单向数据连接。 Pipe 有一个 source 通道和一个 sink 通道。数据会 被写到 sink 通道，从 source 通道读取。</p>
+<h3 id="向管道写数据"><a href="#向管道写数据" class="headerlink" title="向管道写数据"></a>向管道写数据</h3><h3 id="从管道读取数据"><a href="#从管道读取数据" class="headerlink" title="从管道读取数据"></a>从管道读取数据</h3><h2 id="7、Java-NIO2-Path、Paths-与-Files"><a href="#7、Java-NIO2-Path、Paths-与-Files" class="headerlink" title="7、Java NIO2 (Path、Paths 与 Files )"></a>7、Java NIO2 (Path、Paths 与 Files )</h2><p>随着 JDK 7 的发布，Java 对 NIO 进行了极大的扩 展，增强了对文件处理和文件系统特性的支持， 以至于我们称他们为 NIO.2。因为 NIO 提供的 一些功能，NIO 已经成为文件处理中越来越重 要的部分。</p>
+<h3 id="Path-与-Paths"><a href="#Path-与-Paths" class="headerlink" title="Path 与 Paths"></a>Path 与 Paths</h3><p>java.nio.file.Path 接口代表一个平台无关的平台路径，描述了目 录结构中文件的位置。</p>
+<h3 id="Files-类"><a href="#Files-类" class="headerlink" title="Files 类"></a>Files 类</h3><p>java.nio.file.Files 用于操作文件或目录的工具类。</p>
+<h3 id="自动资源管理"><a href="#自动资源管理" class="headerlink" title="自动资源管理"></a>自动资源管理</h3><p>Java 7 增加了一个新特性，该特性提供了另外 一种管理资源的方式，这种方式能自动关闭文 件。这个特性有时被称为自动资源管理 (Automatic Resource Management, ARM)， 该特 性以 try 语句的扩展版为基础。自动资源管理 主要用于，当不再需要文件（或其他资源）时， 可以防止无意中忘记释放它们。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E7%9F%A5%E8%AF%86/" class="category-chain-item">Java知识</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/nio/">#nio</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>NIO</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/NIO/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Npm%E5%92%8CYarn%E9%85%8D%E7%BD%AE%E5%8A%A0%E9%80%9F%E9%95%9C%E5%83%8F/" title="Npm和Yarn配置加速镜像">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Npm和Yarn配置加速镜像</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/MySQL%E6%96%B0%E5%BB%BA%E7%94%A8%E6%88%B7%E5%8F%8A%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83/" title="MySQL新建用户及用户授权">
+                        <span class="hidden-mobile">MySQL新建用户及用户授权</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

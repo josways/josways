@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="仅 展示 Win10 &#x2F; Win11 旧版系统，建议百度。 找到 Java 的安装目录 配置 JAVA_HOME 配置 PATH%JAVA_HOME%\bin  最后 把刚才 所有打开的窗口 ，都点一下 确定 。 验证效果打开 命令行指示符 &#x2F; Windows 终端 123java -versionjavac -version">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java环境配置">
+<meta property="og:url" content="https://blog.josway.cc/2022/05/04/yuque/Java%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="仅 展示 Win10 &#x2F; Win11 旧版系统，建议百度。 找到 Java 的安装目录 配置 JAVA_HOME 配置 PATH%JAVA_HOME%\bin  最后 把刚才 所有打开的窗口 ，都点一下 确定 。 验证效果打开 命令行指示符 &#x2F; Windows 终端 123java -versionjavac -version">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651665589259-5d81253d-f76d-4f29-9b83-ab274d734295.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=504&id=K4xcx&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1007&originWidth=1393&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=125144&status=done&style=none&taskId=u3f0b5ee5-e5ea-442b-bc67-f7a5a51054d&title=&width=696.5">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651666469414-82612969-6428-40fd-bb43-cd464d51a4de.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=247&id=udd1746fd&margin=%5Bobject%20Object%5D&name=image.png&originHeight=791&originWidth=737&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=187194&status=done&style=none&taskId=uc5a5a1c7-c76a-4214-aa58-1dd193366fc&title=&width=230.5">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668355508-6c36eba8-24b7-466a-adcc-bad2de6d7a31.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=435&id=u3e4dbf2c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1232&originWidth=1212&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=82379&status=done&style=none&taskId=u36ad2513-bdb1-4969-8fe9-57613efb5b0&title=&width=428">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668363033-1af7f377-81bb-43bb-934b-007ab199a1eb.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=337&id=ue272d698&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1094&originWidth=958&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=71450&status=done&style=none&taskId=u5adb0071-1db0-4213-aa44-4264fa77d7e&title=&width=295">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668394741-154c0440-e293-4f08-b2bc-25dc23ea75ab.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=346&id=uc968a903&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=96829&status=done&style=none&taskId=ue50c7443-0985-4d1b-be00-7e11b88cf51&title=&width=355">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668441986-d30da667-badc-4a27-a277-15119fb40e14.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=168&id=u9c391d04&margin=%5Bobject%20Object%5D&name=image.png&originHeight=335&originWidth=1306&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36480&status=done&style=none&taskId=uab4b3b26-b52b-4716-9424-64e7bbebf07&title=&width=653">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668458300-5d61e2e5-be09-4834-9fa7-7ef3a61a1fb5.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=355&id=u12c7c6ce&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=95448&status=done&style=none&taskId=uddb36d45-f91b-49d7-b277-55ef7e9cc68&title=&width=365">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668604021-5e96ab08-aa55-4da6-b50c-c98905a1808c.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=344&id=u7dd1f98f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1029&originWidth=1054&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=73125&status=done&style=none&taskId=uda663f8c-2392-416d-a50d-8b7c9a4fed0&title=&width=352">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668651994-0c4a32fb-b93e-4f67-a8b9-dbbc24bd2f55.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=353&id=u0b2bea5c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1094&originWidth=958&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=68365&status=done&style=none&taskId=u2bb6eaa7-268d-4b09-9c29-1cc2cbcb8d7&title=&width=309">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668659402-f44f09f2-ef75-4d50-b7c4-7ae130e280b7.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=378&id=u944fc317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=93238&status=done&style=none&taskId=u1dfd66e3-be59-435b-856d-819bd5cf893&title=&width=388">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668782488-f1bedebf-9a49-4fad-85c2-222d087719b3.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=155&id=u34c86690&margin=%5Bobject%20Object%5D&name=image.png&originHeight=309&originWidth=1279&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=39254&status=done&style=none&taskId=u79149093-4dbb-4dec-859b-97f79161b95&title=&width=639.5">
+<meta property="article:published_time" content="2022-05-04T11:27:37.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.922Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651665589259-5d81253d-f76d-4f29-9b83-ab274d734295.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=504&id=K4xcx&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1007&originWidth=1393&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=125144&status=done&style=none&taskId=u3f0b5ee5-e5ea-442b-bc67-f7a5a51054d&title=&width=696.5">
+  
+  
+  
+  <title>Java环境配置 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java环境配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-04 19:27" pubdate>
+          2022年5月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          147 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java环境配置</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>仅 展示 Win10 &#x2F; Win11 旧版系统，建议百度。</strong></p>
+<h1 id="找到-Java-的安装目录"><a href="#找到-Java-的安装目录" class="headerlink" title="找到 Java 的安装目录"></a>找到 Java 的安装目录</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651665589259-5d81253d-f76d-4f29-9b83-ab274d734295.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=504&id=K4xcx&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1007&originWidth=1393&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=125144&status=done&style=none&taskId=u3f0b5ee5-e5ea-442b-bc67-f7a5a51054d&title=&width=696.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="配置-JAVA-HOME"><a href="#配置-JAVA-HOME" class="headerlink" title="配置 JAVA_HOME"></a>配置 JAVA_HOME</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651666469414-82612969-6428-40fd-bb43-cd464d51a4de.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=247&id=udd1746fd&margin=%5Bobject%20Object%5D&name=image.png&originHeight=791&originWidth=737&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=187194&status=done&style=none&taskId=uc5a5a1c7-c76a-4214-aa58-1dd193366fc&title=&width=230.5" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668355508-6c36eba8-24b7-466a-adcc-bad2de6d7a31.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=435&id=u3e4dbf2c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1232&originWidth=1212&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=82379&status=done&style=none&taskId=u36ad2513-bdb1-4969-8fe9-57613efb5b0&title=&width=428" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668363033-1af7f377-81bb-43bb-934b-007ab199a1eb.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=337&id=ue272d698&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1094&originWidth=958&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=71450&status=done&style=none&taskId=u5adb0071-1db0-4213-aa44-4264fa77d7e&title=&width=295" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668394741-154c0440-e293-4f08-b2bc-25dc23ea75ab.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=346&id=uc968a903&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=96829&status=done&style=none&taskId=ue50c7443-0985-4d1b-be00-7e11b88cf51&title=&width=355" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668441986-d30da667-badc-4a27-a277-15119fb40e14.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=168&id=u9c391d04&margin=%5Bobject%20Object%5D&name=image.png&originHeight=335&originWidth=1306&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36480&status=done&style=none&taskId=uab4b3b26-b52b-4716-9424-64e7bbebf07&title=&width=653" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="配置-PATH"><a href="#配置-PATH" class="headerlink" title="配置 PATH"></a>配置 PATH</h1><p>%JAVA_HOME%\bin</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668458300-5d61e2e5-be09-4834-9fa7-7ef3a61a1fb5.png#clientId=u979ee81f-725b-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=355&id=u12c7c6ce&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=95448&status=done&style=none&taskId=uddb36d45-f91b-49d7-b277-55ef7e9cc68&title=&width=365" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668604021-5e96ab08-aa55-4da6-b50c-c98905a1808c.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=344&id=u7dd1f98f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1029&originWidth=1054&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=73125&status=done&style=none&taskId=uda663f8c-2392-416d-a50d-8b7c9a4fed0&title=&width=352" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="最后-把刚才-所有打开的窗口-，都点一下-确定-。"><a href="#最后-把刚才-所有打开的窗口-，都点一下-确定-。" class="headerlink" title="最后 把刚才 所有打开的窗口 ，都点一下 确定 。"></a>最后 把刚才 所有打开的窗口 ，都点一下 确定 。</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668651994-0c4a32fb-b93e-4f67-a8b9-dbbc24bd2f55.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=353&id=u0b2bea5c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1094&originWidth=958&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=68365&status=done&style=none&taskId=u2bb6eaa7-268d-4b09-9c29-1cc2cbcb8d7&title=&width=309" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668659402-f44f09f2-ef75-4d50-b7c4-7ae130e280b7.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=378&id=u944fc317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1203&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=93238&status=done&style=none&taskId=u1dfd66e3-be59-435b-856d-819bd5cf893&title=&width=388" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="验证效果"><a href="#验证效果" class="headerlink" title="验证效果"></a>验证效果</h1><p>打开 命令行指示符 &#x2F; Windows 终端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -version<br>javac -version<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651668782488-f1bedebf-9a49-4fad-85c2-222d087719b3.png#clientId=u5aae59a8-e573-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=155&id=u34c86690&margin=%5Bobject%20Object%5D&name=image.png&originHeight=309&originWidth=1279&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=39254&status=done&style=none&taskId=u79149093-4dbb-4dec-859b-97f79161b95&title=&width=639.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E6%95%99%E7%A8%8B/" class="category-chain-item">Java教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java环境配置</div>
+      <div>https://blog.josway.cc/2022/05/04/yuque/Java环境配置/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/08/yuque/FUCK-GFW/" title="FUCK-GFW">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FUCK-GFW</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/04/yuque/%E5%8E%9F%E9%AD%94/" title="原魔">
+                        <span class="hidden-mobile">原魔</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

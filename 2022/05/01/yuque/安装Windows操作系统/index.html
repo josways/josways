@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="所需硬件 电脑一台 U 盘一个  所需软件 WEPE https:&#x2F;&#x2F;www.wepe.com.cn&#x2F;download.html Windsys https:&#x2F;&#x2F;windsys.win&#x2F;works  WEPE 下载 Windsys 下载选择你想安装的系统版本（推荐 LTSC 同意协议、确认版本、下载 开始安装安装 WEPE 开始重装重启电脑 进 BIOS 设置 U 盘启动（具体百度（最好，先用 分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装Windows操作系统">
+<meta property="og:url" content="https://blog.josway.cc/2022/05/01/yuque/%E5%AE%89%E8%A3%85Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="所需硬件 电脑一台 U 盘一个  所需软件 WEPE https:&#x2F;&#x2F;www.wepe.com.cn&#x2F;download.html Windsys https:&#x2F;&#x2F;windsys.win&#x2F;works  WEPE 下载 Windsys 下载选择你想安装的系统版本（推荐 LTSC 同意协议、确认版本、下载 开始安装安装 WEPE 开始重装重启电脑 进 BIOS 设置 U 盘启动（具体百度（最好，先用 分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/28199557/1651661994142-9290bb65-0ef4-4488-be21-cebc301f978c.gif#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uf262c21b&margin=%5Bobject%20Object%5D&name=%E5%8A%A8%E7%94%BB.gif&originHeight=1150&originWidth=2080&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=2140314&status=done&style=none&taskId=u23e5daa1-bc35-4887-b068-1ec720ce094&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662144250-4c334ab2-b33c-41c8-8a11-6d4c4f1e3730.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=716&id=u28e78be2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1431&originWidth=1597&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=3231304&status=done&style=none&taskId=u303d5199-a634-465c-9567-311bae14238&title=&width=798.5">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662179449-3ed410e6-7f91-43d0-9b51-365f8564c50b.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=225&id=ud4366b0f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=450&originWidth=862&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36933&status=done&style=none&taskId=u457073f1-4a34-4431-8412-eaad64bc1d6&title=&width=431">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/28199557/1651662362503-d46008da-8a87-4e73-a32e-5425c755beec.gif#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0a52c24b&margin=%5Bobject%20Object%5D&name=%E5%8A%A8%E7%94%BB1.gif&originHeight=1441&originWidth=2470&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1505124&status=done&style=none&taskId=uef14a2db-aef2-450f-9269-e0f7db076c0&title=">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662475013-a9844b13-afce-4c04-b831-144fd15494bc.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=221&id=ucd0544a8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=442&originWidth=1190&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=206321&status=done&style=none&taskId=ufee8dca0-8805-450b-ae25-557d4682128&title=&width=595">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662490331-66052c46-5028-4ee3-9765-ae63f7ab2f98.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=221&id=u95813564&margin=%5Bobject%20Object%5D&name=image.png&originHeight=759&originWidth=1124&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38012&status=done&style=none&taskId=uf52cc72e-c785-47fd-9c9b-a969ec63b79&title=&width=328">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662533516-5ec02236-0c33-48b1-b36f-8ddf54ad5234.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=218&id=uf645bc5c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=700&originWidth=1120&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=45459&status=done&style=none&taskId=u19966d51-676f-476b-a31c-6a285906f62&title=&width=348">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662876960-74a71e10-fc1c-4fc4-bc86-66337443b905.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=119&id=u7197f03c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=238&originWidth=237&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=19607&status=done&style=none&taskId=ubbbc72b1-30e8-4aca-861b-165764937fe&title=&width=118.5">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662891880-8e56c09b-64ac-4caf-a726-f1d969cf373b.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=346&id=uf6a8c306&margin=%5Bobject%20Object%5D&name=image.png&originHeight=920&originWidth=1207&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=128333&status=done&style=none&taskId=uaaa8fdd2-f86f-4075-9108-70bfdf46e96&title=&width=453.5">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662944193-addc7ef4-3bcc-4e1e-bc12-b74863a8104c.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=177&id=u9814782a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=677&originWidth=774&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=145712&status=done&style=none&taskId=ud2b9b245-6b76-4566-bf91-eb374c78dc3&title=&width=202">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651663025119-cc3b98a5-2e54-4041-8929-4a0d1f3f02a8.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=293&id=ufa06eb0e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=754&originWidth=1111&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=85152&status=done&style=none&taskId=u287e5c12-eade-42f3-858f-3676be47ff9&title=&width=431.5">
+<meta property="article:published_time" content="2022-05-01T07:34:09.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.923Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/gif/28199557/1651661994142-9290bb65-0ef4-4488-be21-cebc301f978c.gif#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uf262c21b&margin=%5Bobject%20Object%5D&name=%E5%8A%A8%E7%94%BB.gif&originHeight=1150&originWidth=2080&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=2140314&status=done&style=none&taskId=u23e5daa1-bc35-4887-b068-1ec720ce094&title=">
+  
+  
+  
+  <title>安装Windows操作系统 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="安装Windows操作系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-01 15:34" pubdate>
+          2022年5月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          251 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">安装Windows操作系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="所需硬件"><a href="#所需硬件" class="headerlink" title="所需硬件"></a>所需硬件</h1><ul>
+<li>电脑一台</li>
+<li>U 盘一个</li>
+</ul>
+<h1 id="所需软件"><a href="#所需软件" class="headerlink" title="所需软件"></a>所需软件</h1><ul>
+<li>WEPE <a target="_blank" rel="noopener" href="https://www.wepe.com.cn/download.html">https://www.wepe.com.cn/download.html</a></li>
+<li>Windsys <a target="_blank" rel="noopener" href="https://windsys.win/works">https://windsys.win/works</a></li>
+</ul>
+<h2 id="WEPE-下载"><a href="#WEPE-下载" class="headerlink" title="WEPE 下载"></a>WEPE 下载</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/gif/28199557/1651661994142-9290bb65-0ef4-4488-be21-cebc301f978c.gif#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uf262c21b&margin=%5Bobject%20Object%5D&name=%E5%8A%A8%E7%94%BB.gif&originHeight=1150&originWidth=2080&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=2140314&status=done&style=none&taskId=u23e5daa1-bc35-4887-b068-1ec720ce094&title=" srcset="/img/loading.gif" lazyload alt="动画.gif"></p>
+<h2 id="Windsys-下载"><a href="#Windsys-下载" class="headerlink" title="Windsys 下载"></a>Windsys 下载</h2><h3 id="选择你想安装的系统版本（推荐-LTSC"><a href="#选择你想安装的系统版本（推荐-LTSC" class="headerlink" title="选择你想安装的系统版本（推荐 LTSC"></a>选择你想安装的系统版本（推荐 LTSC</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662144250-4c334ab2-b33c-41c8-8a11-6d4c4f1e3730.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=716&id=u28e78be2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1431&originWidth=1597&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=3231304&status=done&style=none&taskId=u303d5199-a634-465c-9567-311bae14238&title=&width=798.5" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662179449-3ed410e6-7f91-43d0-9b51-365f8564c50b.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=225&id=ud4366b0f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=450&originWidth=862&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36933&status=done&style=none&taskId=u457073f1-4a34-4431-8412-eaad64bc1d6&title=&width=431" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="同意协议、确认版本、下载"><a href="#同意协议、确认版本、下载" class="headerlink" title="同意协议、确认版本、下载"></a>同意协议、确认版本、下载</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/gif/28199557/1651662362503-d46008da-8a87-4e73-a32e-5425c755beec.gif#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0a52c24b&margin=%5Bobject%20Object%5D&name=%E5%8A%A8%E7%94%BB1.gif&originHeight=1441&originWidth=2470&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1505124&status=done&style=none&taskId=uef14a2db-aef2-450f-9269-e0f7db076c0&title=" srcset="/img/loading.gif" lazyload alt="动画1.gif"></p>
+<h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><h2 id="安装-WEPE"><a href="#安装-WEPE" class="headerlink" title="安装 WEPE"></a>安装 WEPE</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662475013-a9844b13-afce-4c04-b831-144fd15494bc.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=221&id=ucd0544a8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=442&originWidth=1190&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=206321&status=done&style=none&taskId=ufee8dca0-8805-450b-ae25-557d4682128&title=&width=595" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662490331-66052c46-5028-4ee3-9765-ae63f7ab2f98.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=221&id=u95813564&margin=%5Bobject%20Object%5D&name=image.png&originHeight=759&originWidth=1124&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38012&status=done&style=none&taskId=uf52cc72e-c785-47fd-9c9b-a969ec63b79&title=&width=328" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662533516-5ec02236-0c33-48b1-b36f-8ddf54ad5234.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=218&id=uf645bc5c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=700&originWidth=1120&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=45459&status=done&style=none&taskId=u19966d51-676f-476b-a31c-6a285906f62&title=&width=348" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="开始重装"><a href="#开始重装" class="headerlink" title="开始重装"></a>开始重装</h1><h2 id="重启电脑-进-BIOS-设置-U-盘启动（具体百度"><a href="#重启电脑-进-BIOS-设置-U-盘启动（具体百度" class="headerlink" title="重启电脑 进 BIOS 设置 U 盘启动（具体百度"></a>重启电脑 进 BIOS 设置 U 盘启动（具体百度</h2><p>（最好，先用 分区精灵 格式化并快速分区一下 现有的系统盘<br>进入 WEPE 后，点击 <code>Dism++</code> 软件，接受协议。<br>然后进行系统安装（<code>恢复功能</code>-&gt;<code>系统还原</code>)<br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662876960-74a71e10-fc1c-4fc4-bc86-66337443b905.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=119&id=u7197f03c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=238&originWidth=237&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=19607&status=done&style=none&taskId=ubbbc72b1-30e8-4aca-861b-165764937fe&title=&width=118.5" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662891880-8e56c09b-64ac-4caf-a726-f1d969cf373b.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=346&id=uf6a8c306&margin=%5Bobject%20Object%5D&name=image.png&originHeight=920&originWidth=1207&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=128333&status=done&style=none&taskId=uaaa8fdd2-f86f-4075-9108-70bfdf46e96&title=&width=453.5" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651662944193-addc7ef4-3bcc-4e1e-bc12-b74863a8104c.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=177&id=u9814782a&margin=%5Bobject%20Object%5D&name=image.png&originHeight=677&originWidth=774&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=145712&status=done&style=none&taskId=ud2b9b245-6b76-4566-bf91-eb374c78dc3&title=&width=202" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1651663025119-cc3b98a5-2e54-4041-8929-4a0d1f3f02a8.png#clientId=u69d6dc6c-10f4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=293&id=ufa06eb0e&margin=%5Bobject%20Object%5D&name=image.png&originHeight=754&originWidth=1111&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=85152&status=done&style=none&taskId=u287e5c12-eade-42f3-858f-3676be47ff9&title=&width=431.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="最后-拔掉-U-盘-重启电脑"><a href="#最后-拔掉-U-盘-重启电脑" class="headerlink" title="最后 拔掉 U 盘 重启电脑"></a>最后 拔掉 U 盘 重启电脑</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Windows%E6%95%99%E7%A8%8B/" class="category-chain-item">Windows教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Windows/">#Windows</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>安装Windows操作系统</div>
+      <div>https://blog.josway.cc/2022/05/01/yuque/安装Windows操作系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/04/yuque/%E5%8E%9F%E9%AD%94/" title="原魔">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">原魔</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/28/yuque/%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE/" title="电脑配置">
+                        <span class="hidden-mobile">电脑配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

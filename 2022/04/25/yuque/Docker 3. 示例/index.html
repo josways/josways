@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Docker 实例 部分。 简单示例 运行一些容器注: 只是简单示例,生产环境建议把数据库持久化数据映射到容器外部 !!!具体可在 https:&#x2F;&#x2F;hub.docker.com&#x2F; 直接搜索并查看官方文档! MySQL Docker 容器运行1docker run -itd --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 3. 示例">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/Docker%203.%20%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="Docker 实例 部分。 简单示例 运行一些容器注: 只是简单示例,生产环境建议把数据库持久化数据映射到容器外部 !!!具体可在 https:&#x2F;&#x2F;hub.docker.com&#x2F; 直接搜索并查看官方文档! MySQL Docker 容器运行1docker run -itd --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD&#x3D;123456 mysql">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900620687-afd49b2f-62f1-4ee4-b781-1051c9e0707e.png#clientId=u6581a453-7659-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u65abb64c&margin=%5Bobject%20Object%5D&name=dockerfile-ensemble.png&originHeight=125&originWidth=337&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=3999&status=done&style=none&taskId=u5c75ef5d-48a5-42de-b082-fb9ff4b4e0b&title=">
+<meta property="article:published_time" content="2022-04-25T14:44:45.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.941Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900620687-afd49b2f-62f1-4ee4-b781-1051c9e0707e.png#clientId=u6581a453-7659-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u65abb64c&margin=%5Bobject%20Object%5D&name=dockerfile-ensemble.png&originHeight=125&originWidth=337&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=3999&status=done&style=none&taskId=u5c75ef5d-48a5-42de-b082-fb9ff4b4e0b&title=">
+  
+  
+  
+  <title>Docker 3. 示例 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Docker 3. 示例"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:44" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker 3. 示例</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Docker 实例 部分。</p>
+<h2 id="简单示例-运行一些容器"><a href="#简单示例-运行一些容器" class="headerlink" title="简单示例 运行一些容器"></a>简单示例 运行一些容器</h2><h3 id="注-只是简单示例-生产环境建议把数据库持久化数据映射到容器外部"><a href="#注-只是简单示例-生产环境建议把数据库持久化数据映射到容器外部" class="headerlink" title="注: 只是简单示例,生产环境建议把数据库持久化数据映射到容器外部 !!!"></a>注: 只是简单示例,生产环境建议把数据库持久化数据映射到容器外部 !!!</h3><p>具体可在 <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a> 直接搜索并查看官方文档!</p>
+<h3 id="MySQL-Docker-容器运行"><a href="#MySQL-Docker-容器运行" class="headerlink" title="MySQL Docker 容器运行"></a>MySQL Docker 容器运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -v mysql57_data:/var/lib/mysql mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --lower_case_table_names=1<br></code></pre></td></tr></table></figure>
+
+<h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h4><ul>
+<li>run 运行</li>
+<li>-itd 组合命令:<ul>
+<li>-i 以交互模式运行容器，通常与 -t 同时使用；</li>
+<li>-t 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</li>
+<li>-d 后台运行容器，并返回容器 ID；</li>
+</ul>
+</li>
+<li>–name mysql5731 为容器指定一个(独一无二)名字叫 mysql5731</li>
+<li>-p 3306:3306 映射容器服务的 3306 端口到宿主机的 3306 端口。外部可以直接通过 宿主机 ip:3306 访问到 Mysql 的服务。(:左边是宿主机端口 , :右边是容器服务端口)</li>
+<li>-e MYSQL_ROOT_PASSWORD&#x3D;123456   设置 MySQL 服务 root 用户的密码为 123456</li>
+<li>mysql:5.7.31 需要启动的 镜像名称:版本号</li>
+</ul>
+<h3 id="Postgres-Docker-容器运行"><a href="#Postgres-Docker-容器运行" class="headerlink" title="Postgres Docker 容器运行"></a>Postgres Docker 容器运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name postgres13 -p 5432:5432 -e POSTGRES_PASSWORD=123456 postgres:13<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -itd --name postgres13 -p 5432:5432 -e POSTGRES_PASSWORD=123456 -e PGDATA=/var/lib/postgresql/data/pgdata -v postgres13_data:/var/lib/postgresql/data postgres:13<br></code></pre></td></tr></table></figure>
+
+<h4 id="解释-1"><a href="#解释-1" class="headerlink" title="解释"></a>解释</h4><ul>
+<li>–name postgres123 为容器指定一个(独一无二)名字叫 postgres123</li>
+<li>-p 5432:5432 映射容器服务的 5432 端口到宿主机的 5432 端口。外部可以直接通过 宿主机 ip:5432 访问到 Postgres 的服务。(:左边是宿主机端口 , :右边是容器服务端口)  (宿主机端口号独一无二)</li>
+<li>-e POSTGRES_PASSWORD&#x3D;123456   设置 Postgres 服务 root 用户的密码为 123456</li>
+<li>postgres:12.3 需要启动的 镜像名称:版本号</li>
+</ul>
+<h3 id="Oracle-Docker-容器运行"><a href="#Oracle-Docker-容器运行" class="headerlink" title="Oracle Docker 容器运行"></a>Oracle Docker 容器运行</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> -itd --name oraclexe11g -p 1521:1521 -e <span class="hljs-attribute">ORACLE_ALLOW_REMOTE</span>=<span class="hljs-literal">true</span> oracleinanutshell/oracle-xe-11g<br></code></pre></td></tr></table></figure>
+
+<h4 id="解释-2"><a href="#解释-2" class="headerlink" title="解释"></a>解释</h4><ul>
+<li>–name oraclexe11g 为容器指定一个(独一无二)名字叫 oraclexe11g</li>
+<li>-e ORACLE_ALLOW_REMOTE&#x3D;true   开启远程访问</li>
+<li>oracleinanutshell&#x2F;oracle-xe-11g 需要启动的 镜像名称:版本号 注: 无冒号时默认启动 latest 版本!</li>
+</ul>
+<h3 id="Redis-Docker-容器运行"><a href="#Redis-Docker-容器运行" class="headerlink" title="Redis Docker 容器运行"></a>Redis Docker 容器运行</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -itd --name redis6 -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> redis:<span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="解释-3"><a href="#解释-3" class="headerlink" title="解释"></a>解释</h4><ul>
+<li>–name redis606 为容器指定一个(独一无二)名字叫 redis606</li>
+<li>-p 5432:5432 映射容器服务的 6379 端口到宿主机的 6379 端口。外部可以直接通过 宿主机 ip:6379 访问到 Redis 的服务。(:左边是宿主机端口 , :右边是容器服务端口)  (宿主机端口号独一无二)</li>
+<li>redis:6.0.6 需要启动的 镜像名称:版本号</li>
+</ul>
+<h3 id="Cache-x2F-IRIS-Docker-容器运行"><a href="#Cache-x2F-IRIS-Docker-容器运行" class="headerlink" title="Cache &#x2F; IRIS Docker 容器运行"></a>Cache &#x2F; IRIS Docker 容器运行</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -itd --name iriscommunity2020202110 -p <span class="hljs-number">52773</span>:<span class="hljs-number">52773</span> -p <span class="hljs-number">51773</span>:<span class="hljs-number">51773</span>  store/intersystems/iris-community:<span class="hljs-number">2020</span>.<span class="hljs-number">2.0.211.0</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="解释-4"><a href="#解释-4" class="headerlink" title="解释"></a>解释</h4><ul>
+<li>–name iriscommunity2020202110 为容器指定一个(独一无二)名字叫 iriscommunity2020202110</li>
+<li>-p 52773:52773 映射容器服务的 52773 端口到宿主机的 52773 端口。外部可以直接通过 宿主机 ip:52773 访问到 Cache &#x2F; IRIS 的服务。(:左边是宿主机端口 , :右边是容器服务端口)  (宿主机端口号独一无二)</li>
+<li>-p 51773:51773 映射容器服务的 51773 端口到宿主机的 51773 端口。外部可以直接通过 宿主机 ip:51773 访问到 Cache &#x2F; IRIS 的服务。(:左边是宿主机端口 , :右边是容器服务端口)  (宿主机端口号独一无二)</li>
+<li>store&#x2F;intersystems&#x2F;iris-community:2020.2.0.211.0   需要启动的 镜像名称:版本号</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://ip:52773/csp/sys/UtilHome.csp">http://ip:52773/csp/sys/UtilHome.csp</a></li>
+<li>使用_SYSTEM 登录名和密码 SYS。(登录后需要更改密码。)</li>
+</ul>
+<h2 id="两种方式生成-Docker-image"><a href="#两种方式生成-Docker-image" class="headerlink" title="两种方式生成 Docker image"></a>两种方式生成 Docker image</h2><h3 id="1-使用现有的-Docker-Container-进行-Commit-操作获取-image"><a href="#1-使用现有的-Docker-Container-进行-Commit-操作获取-image" class="headerlink" title="1 使用现有的 Docker Container 进行 Commit 操作获取 image"></a>1 使用现有的 Docker Container 进行 Commit 操作获取 image</h3><h3 id="2-使用-Dockerfile"><a href="#2-使用-Dockerfile" class="headerlink" title="2 使用 Dockerfile"></a>2 使用 Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment">#基础镜像</span><br><span class="hljs-keyword">FROM</span> ubuntu:<span class="hljs-number">18.04</span><br><span class="hljs-comment">#维护者</span><br><span class="hljs-keyword">MAINTAINER</span> <span class="hljs-string">&quot;Josway&quot;</span><br><span class="hljs-comment">#复制文件并解压</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> jre/server-jre-8u261-linux-x64.tar.gz /root/jre/</span><br><span class="hljs-comment">#复制文件</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> target/visualization-0.0.1-SNAPSHOT.jar /root/webapps/</span><br><span class="hljs-comment">#环境变量设置</span><br><span class="hljs-keyword">ENV</span> JAVA_HOME=/root/jre/jdk1.<span class="hljs-number">8.0</span>_261<br><span class="hljs-keyword">ENV</span> CLASSPATH=$JAVA_HOME/bin<br><span class="hljs-keyword">ENV</span> PATH=.:$JAVA_HOME/bin:$PATH<br><span class="hljs-comment">#暴露端口</span><br><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">8080</span><br><span class="hljs-comment">#容器启动命令</span><br><span class="hljs-comment">#CMD [&quot;java&quot;,&quot;-version&quot;]</span><br><span class="hljs-comment">#入口点</span><br><span class="hljs-comment">#ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/root/webapps/drools-0.0.1-SNAPSHOT.jar&quot;,&quot;--spring.config.location=/root/config/application.properties&quot;]</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;java&quot;</span>,<span class="hljs-string">&quot;-jar&quot;</span>,<span class="hljs-string">&quot;/root/webapps/visualization-0.0.1-SNAPSHOT.jar&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="部署-ISCP"><a href="#部署-ISCP" class="headerlink" title="部署 ISCP"></a>部署 ISCP</h3><h4 id="方式-1-直接使用-dockerhub-现成的-tomcat-镜像"><a href="#方式-1-直接使用-dockerhub-现成的-tomcat-镜像" class="headerlink" title="方式 1 直接使用 dockerhub 现成的 tomcat 镜像"></a>方式 1 直接使用 dockerhub 现成的 tomcat 镜像</h4><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">docker run -it --name iscptest1 -p <span class="hljs-number">9091</span><span class="hljs-symbol">:</span><span class="hljs-number">8080</span> -v /home/josway/iscp/<span class="hljs-symbol">:/usr/local/tomcat/webapps/iscp/</span> <span class="hljs-symbol">tomcat:</span><span class="hljs-number">7.0</span>.<span class="hljs-number">105</span>-jdk8-openjdk<br></code></pre></td></tr></table></figure>
+
+<h4 id="方式-2-自己-build-镜像-通过-Dockerfile"><a href="#方式-2-自己-build-镜像-通过-Dockerfile" class="headerlink" title="方式 2 自己 build 镜像,通过 Dockerfile"></a>方式 2 自己 build 镜像,通过 Dockerfile</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment">#基础镜像</span><br><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span><br><span class="hljs-comment">#维护者</span><br><span class="hljs-keyword">MAINTAINER</span> <span class="hljs-string">&quot;Josway&quot;</span><br><span class="hljs-comment">#更新索引 安装软件 nano wget</span><br><span class="hljs-comment">#RUN yum update</span><br><span class="hljs-comment">#RUN yum install nano wget -y</span><br><span class="hljs-comment">#添加添加软件</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> server-jre-8u261-linux-x64.tar.gz /root/java/jre/</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> apache-tomcat-7.0.105.tar.gz /root/java/</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> iscp.tar /root/java/apache-tomcat-7.0.105/webapps/</span><br><span class="hljs-comment">#环境变量设置</span><br><span class="hljs-keyword">ENV</span> JAVA_HOME=/root/java/jre/jdk1.<span class="hljs-number">8.0</span>_261<br><span class="hljs-keyword">ENV</span> CLASSPATH=$JAVA_HOME/bin<br><span class="hljs-keyword">ENV</span> PATH=.:$JAVA_HOME/bin:$PATH<br><span class="hljs-comment">#容器启动后执行</span><br><span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;sh&quot;</span>,<span class="hljs-string">&quot;/root/java/apache-tomcat-7.0.105/bin/catalina.sh&quot;</span>,<span class="hljs-string">&quot;run&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker build -t iscp:1.0 . &amp;&amp; docker run --name iscptest2 -p 9092:8080 --privileged iscp:1.0<br></code></pre></td></tr></table></figure>
+
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/28199557/1650900620687-afd49b2f-62f1-4ee4-b781-1051c9e0707e.png#clientId=u6581a453-7659-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u65abb64c&margin=%5Bobject%20Object%5D&name=dockerfile-ensemble.png&originHeight=125&originWidth=337&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=3999&status=done&style=none&taskId=u5c75ef5d-48a5-42de-b082-fb9ff4b4e0b&title=" srcset="/img/loading.gif" lazyload alt="dockerfile-ensemble.png"></p>
+<blockquote>
+<p>参考<br><a target="_blank" rel="noopener" href="https://community.intersystems.com/post/containerization-cach%C3%A9">https://community.intersystems.com/post/containerization-cach%C3%A9</a><br><a target="_blank" rel="noopener" href="https://github.com/zrml/ccontainermain">https://github.com/zrml/ccontainermain</a></p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> centos:<span class="hljs-number">7</span><br><br><span class="hljs-keyword">MAINTAINER</span> <span class="hljs-string">&quot;Josway&quot;</span><br><br><span class="hljs-comment"># update OS + dependencies &amp; run Caché silent instal</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> yum -y update \</span><br><span class="language-bash"> &amp;&amp; yum -y install <span class="hljs-built_in">which</span> tar hostname net-tools wget \</span><br><span class="language-bash"> &amp;&amp; yum -y clean all \</span><br><span class="language-bash"> &amp;&amp; <span class="hljs-built_in">ln</span> -sf /etc/locatime /usr/share/zoneinfo/Europe/Prague</span><br><br><span class="hljs-keyword">ARG</span> password=<span class="hljs-string">&quot;sys&quot;</span><br><span class="hljs-keyword">ARG</span> cache=ensemble-<span class="hljs-number">2016.2</span>.<span class="hljs-number">3.904</span>.<span class="hljs-number">11</span>-lnxrhx64<br><br><span class="hljs-keyword">ENV</span> TMP_INSTALL_DIR=/tmp/distrib<br><br><span class="hljs-comment"># vars for Caché silent install</span><br><span class="hljs-keyword">ENV</span> ISC_PACKAGE_INSTANCENAME=<span class="hljs-string">&quot;ENSEMBLE&quot;</span> \<br>    ISC_PACKAGE_INSTALLDIR=<span class="hljs-string">&quot;/opt/ensemble/&quot;</span> \<br>    ISC_PACKAGE_UNICODE=<span class="hljs-string">&quot;Y&quot;</span> \<br>    ISC_PACKAGE_CLIENT_COMPONENTS=<span class="hljs-string">&quot;&quot;</span> \<br>    ISC_PACKAGE_INITIAL_SECURITY=<span class="hljs-string">&quot;Normal&quot;</span> \<br>    ISC_PACKAGE_USER_PASSWORD=$&#123;password&#125;<br><br><span class="hljs-comment"># set-up and install Caché from distrib_tmp dir</span><br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> <span class="hljs-variable">$&#123;TMP_INSTALL_DIR&#125;</span></span><br><br><span class="hljs-keyword">ADD</span><span class="language-bash"> <span class="hljs-variable">$&#123;cache&#125;</span>.tar.gz .</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> ccontainermain /</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> cache.key /</span><br><br><span class="hljs-comment"># cache distributive</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> ./<span class="hljs-variable">$&#123;cache&#125;</span>/cinstall_silent \</span><br><span class="language-bash"> &amp;&amp; ccontrol stop <span class="hljs-variable">$ISC_PACKAGE_INSTANCENAME</span> quietly \</span><br><span class="language-bash"> &amp;&amp; <span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$TMP_INSTALL_DIR</span></span><br><br><span class="hljs-comment"># Caché container main process PID 1 (https://github.com/zrml/ccontainermain)</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chmod</span> +x /ccontainermain</span><br><br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> <span class="hljs-variable">$&#123;ISC_PACKAGE_INSTALLDIR&#125;</span></span><br><br><span class="hljs-comment"># TCP sockets that can be accessed if user wants to (see &#x27;docker run -p&#x27; flag)</span><br><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">57772</span> <span class="hljs-number">1972</span><br><br><span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;/ccontainermain&quot;</span>, <span class="hljs-string">&quot;-cconsole&quot;</span>, <span class="hljs-string">&quot;-i&quot;</span>, <span class="hljs-string">&quot;ensemble&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker build -t ensemble:2016.2.3.904.11 . &amp;&amp; docker run -d -p 57772:57772 -p 1972:1972 --privileged ensemble:2016.2.3.904.11<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://localhost:57772/csp/sys/UtilHome.csp">http://localhost:57772/csp/sys/UtilHome.csp</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/docker%E6%95%99%E7%A8%8B/" class="category-chain-item">docker教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/docker/">#docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Docker 3. 示例</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/Docker 3. 示例/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Docker%204.%20%E7%BB%83%E4%B9%A0/" title="Docker 4. 练习">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker 4. 练习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Docker%202.%20%E5%9F%BA%E7%A1%80/" title="Docker 2. 基础">
+                        <span class="hidden-mobile">Docker 2. 基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

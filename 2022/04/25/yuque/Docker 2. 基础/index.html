@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Docker 基础 部分。 基本命令 直接翻译123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 2. 基础">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/Docker%202.%20%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="Docker 基础 部分。 基本命令 直接翻译123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-25T14:44:40.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.942Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Docker 2. 基础 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Docker 2. 基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:44" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker 2. 基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Docker 基础 部分。</p>
+<h2 id="基本命令-直接翻译"><a href="#基本命令-直接翻译" class="headerlink" title="基本命令 直接翻译"></a>基本命令 直接翻译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><code class="hljs bash">josway@josway-ThinkPad-E565: ~ $ docker                                     [14:47:51]<br><br>Usage:  docker [OPTIONS] COMMAND<br>用法:   docker [可选] 命令<br><br>A self-sufficient runtime <span class="hljs-keyword">for</span> containers<br>容器的自给自足运行时<br><br>Options:<br>可选:<br>      --config string      Location of client config files (default<br>                           <span class="hljs-string">&quot;/home/josway/.docker&quot;</span>)<br>                           客户端配置文件的位置(默认<br>                           “/home/josway/.docker”)<br>  -c, --context string     Name of the context to use to connect to the daemon<br>                           用于连接守护进程的上下文的名称<br>                           (overrides DOCKER_HOST <span class="hljs-built_in">env</span> var and default context<br>                           <span class="hljs-built_in">set</span> with <span class="hljs-string">&quot;docker context use&quot;</span>)<br>                           (覆盖DOCKER_HOST环境变量和默认上下文 设置为“docker上下文使用”)<br>  -D, --debug              Enable debug mode<br>                           启用调试模式<br>  -H, --host list          Daemon socket(s) to connect to<br>                           要连接到的守护进程套接字<br>  -l, --log-level string   Set the logging level<br>                           设置日志级别<br>                           (<span class="hljs-string">&quot;debug&quot;</span>|<span class="hljs-string">&quot;info&quot;</span>|<span class="hljs-string">&quot;warn&quot;</span>|<span class="hljs-string">&quot;error&quot;</span>|<span class="hljs-string">&quot;fatal&quot;</span>) (default <span class="hljs-string">&quot;info&quot;</span>)<br>                           (“调试”|“信息”|“警告”|“错误”|“致命”)(默认“信息”)<br>      --tls                Use TLS; implied by --tlsverify<br>                           使用TLS; 通过--tlsverify暗示<br>      --tlscacert string   Trust certs signed only by this CA (default<br>                           <span class="hljs-string">&quot;/home/josway/.docker/ca.pem&quot;</span>)<br>                           仅由该CA签名的信任证书（默认<br>                            “ /home/josway/.docker/ca.pem”）<br>      --tlscert string     Path to TLS certificate file (default<br>                           <span class="hljs-string">&quot;/home/josway/.docker/cert.pem&quot;</span>)<br>                           TLS证书文件的路径（默认<br>                            “ /home/josway/.docker/cert.pem”）<br>      --tlskey string      Path to TLS key file (default<br>                           <span class="hljs-string">&quot;/home/josway/.docker/key.pem&quot;</span>)<br>                           TLS密钥文件的路径（默认<br>                            “ /home/josway/.docker/key.pem”）<br>      --tlsverify          Use TLS and verify the remote<br>                           使用TLS并验证远程<br>  -v, --version            Print version information and quit<br>                           打印版本信息并退出<br><br>Management Commands:<br>管理命令：<br><br>  builder     Manage builds<br>              管理构建<br>  config      Manage Docker configs<br>              管理Docker配置<br>  container   Manage containers<br>              管理容器<br>  context     Manage contexts<br>              管理上下文<br>  engine      Manage the docker engine<br>              管理docker引擎<br>  image       Manage images<br>              管理图像<br>  network     Manage networks<br>              管理网络<br>  node        Manage Swarm nodes<br>              管理群节点<br>  plugin      Manage plugins<br>              管理插件<br>  secret      Manage Docker secrets<br>              管理Docker机密<br>  service     Manage services<br>              管理服务<br>  stack       Manage Docker stacks<br>              管理Docker堆栈<br>  swarm       Manage Swarm<br>              管理群<br>  system      Manage Docker<br>              管理Docker<br>  trust       Manage trust on Docker images<br>              管理对Docker映像的信任<br>  volume      Manage volumes<br>              管理卷<br><br>Commands:<br>  attach      Attach <span class="hljs-built_in">local</span> standard input, output, and error streams to a running container<br>              将本地标准输入，输出和错误流附加到正在运行的容器<br>  build       Build an image from a Dockerfile<br>              从Dockerfile构建映像<br>  commit      Create a new image from a container<span class="hljs-string">&#x27;s changes</span><br><span class="hljs-string">              根据容器的更改创建新图像</span><br><span class="hljs-string">  cp          Copy files/folders between a container and the local filesystem</span><br><span class="hljs-string">              在容器和本地文件系统之间复制文件/文件夹</span><br><span class="hljs-string">  create      Create a new container</span><br><span class="hljs-string">              创建一个新的容器</span><br><span class="hljs-string">  diff        Inspect changes to files or directories on a container&#x27;</span>s filesystem<br>              检查容器文件系统上文件或目录的更改<br>  events      Get real time events from the server<br>              从服务器获取实时事件<br>  <span class="hljs-built_in">exec</span>        Run a <span class="hljs-built_in">command</span> <span class="hljs-keyword">in</span> a running container<br>              在正在运行的容器中运行命令<br>  <span class="hljs-built_in">export</span>      Export a container<span class="hljs-string">&#x27;s filesystem as a tar archive</span><br><span class="hljs-string">              将容器的文件系统导出为tar存档</span><br><span class="hljs-string">  history     Show the history of an image</span><br><span class="hljs-string">              显示图像的历史记录</span><br><span class="hljs-string">  images      List images</span><br><span class="hljs-string">              列出图片</span><br><span class="hljs-string">  import      Import the contents from a tarball to create a filesystem image</span><br><span class="hljs-string">              从tarball导入内容以创建文件系统映像</span><br><span class="hljs-string">  info        Display system-wide information</span><br><span class="hljs-string">              显示系统范围的信息</span><br><span class="hljs-string">  inspect     Return low-level information on Docker objects</span><br><span class="hljs-string">              返回有关Docker对象的低级信息</span><br><span class="hljs-string">  kill        Kill one or more running containers</span><br><span class="hljs-string">              杀死一个或多个正在运行的容器</span><br><span class="hljs-string">  load        Load an image from a tar archive or STDIN</span><br><span class="hljs-string">              从tar存档或STDIN加载图像</span><br><span class="hljs-string">  login       Log in to a Docker registry</span><br><span class="hljs-string">              登录Docker注册表</span><br><span class="hljs-string">  logout      Log out from a Docker registry</span><br><span class="hljs-string">              从Docker注册表注销</span><br><span class="hljs-string">  logs        Fetch the logs of a container</span><br><span class="hljs-string">              提取容器的日志</span><br><span class="hljs-string">  pause       Pause all processes within one or more containers</span><br><span class="hljs-string">              暂停一个或多个容器中的所有进程</span><br><span class="hljs-string">  port        List port mappings or a specific mapping for the container</span><br><span class="hljs-string">              列出端口映射或容器的特定映射</span><br><span class="hljs-string">  ps          List containers</span><br><span class="hljs-string">              列出容器</span><br><span class="hljs-string">  pull        Pull an image or a repository from a registry</span><br><span class="hljs-string">              从注册表中提取图像或存储库</span><br><span class="hljs-string">  push        Push an image or a repository to a registry</span><br><span class="hljs-string">              将映像或存储库推送到注册表</span><br><span class="hljs-string">  rename      Rename a container</span><br><span class="hljs-string">              重命名容器</span><br><span class="hljs-string">  restart     Restart one or more containers</span><br><span class="hljs-string">              重新启动一个或多个容器</span><br><span class="hljs-string">  rm          Remove one or more containers</span><br><span class="hljs-string">              取出一个或多个容器</span><br><span class="hljs-string">  rmi         Remove one or more images</span><br><span class="hljs-string">              删除一个或多个图像</span><br><span class="hljs-string">  run         Run a command in a new container</span><br><span class="hljs-string">              在新容器中运行命令</span><br><span class="hljs-string">  save        Save one or more images to a tar archive (streamed to STDOUT by default)</span><br><span class="hljs-string">              将一个或多个图像保存到tar存档（默认情况下流式传输到STDOUT）</span><br><span class="hljs-string">  search      Search the Docker Hub for images</span><br><span class="hljs-string">              在Docker Hub中搜索图像</span><br><span class="hljs-string">  start       Start one or more stopped containers</span><br><span class="hljs-string">              启动一个或多个已停止的容器</span><br><span class="hljs-string">  stats       Display a live stream of container(s) resource usage statistics</span><br><span class="hljs-string">              显示容器资源使用情况统计信息的实时流</span><br><span class="hljs-string">  stop        Stop one or more running containers</span><br><span class="hljs-string">              停止一个或多个运行中的容器</span><br><span class="hljs-string">  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE</span><br><span class="hljs-string">              创建引用了SOURCE_IMAGE的标签TARGET_IMAGE</span><br><span class="hljs-string">  top         Display the running processes of a container</span><br><span class="hljs-string">              显示容器的运行过程</span><br><span class="hljs-string">  unpause     Unpause all processes within one or more containers</span><br><span class="hljs-string">              取消暂停一个或多个容器中的所有进程</span><br><span class="hljs-string">  update      Update configuration of one or more containers</span><br><span class="hljs-string">              更新一个或多个容器的配置</span><br><span class="hljs-string">  version     Show the Docker version information</span><br><span class="hljs-string">              显示Docker版本信息</span><br><span class="hljs-string">  wait        Block until one or more containers stop, then print their exit codes</span><br><span class="hljs-string">              阻塞直到一个或多个容器停止，然后打印其退出代码</span><br><span class="hljs-string"></span><br><span class="hljs-string">Run &#x27;</span>docker COMMAND --<span class="hljs-built_in">help</span><span class="hljs-string">&#x27; for more information on a command.</span><br><span class="hljs-string">运行“ docker COMMAND --help”以获取有关命令的更多信息。</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="注意-docker-COMMAND-–help"><a href="#注意-docker-COMMAND-–help" class="headerlink" title="注意 docker COMMAND –help"></a>注意 docker COMMAND –help</h3><p>不知道命令该怎么写的时候 , 可以使用 docker COMMAND –help 查看用法 . 或者直接<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>.</p>
+<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例:"></a>简单示例:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><br>[josway:<span class="hljs-operator">~</span>]$ docker <span class="hljs-keyword">start</span> <span class="hljs-comment">--help</span><br><br>Usage:  docker <span class="hljs-keyword">start</span> [OPTIONS] CONTAINER [CONTAINER...]<br>用法:   docker <span class="hljs-keyword">start</span> [可选] container<br><br><span class="hljs-keyword">Start</span> <span class="hljs-keyword">one</span> <span class="hljs-keyword">or</span> more stopped containers<br><br>Options:<br>可选:<br>  <span class="hljs-operator">-</span>a, <span class="hljs-comment">--attach                  Attach STDOUT/STDERR and forward signals</span><br>      <span class="hljs-comment">--checkpoint string       Restore from this checkpoint</span><br>      <span class="hljs-comment">--checkpoint-dir string   Use a custom checkpoint storage directory</span><br>      <span class="hljs-comment">--detach-keys string      Override the key sequence for detaching a container</span><br>  <span class="hljs-operator">-</span>i, <span class="hljs-comment">--interactive             Attach container&#x27;s STDIN</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/docker%E6%95%99%E7%A8%8B/" class="category-chain-item">docker教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/docker/">#docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Docker 2. 基础</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/Docker 2. 基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Docker%203.%20%E7%A4%BA%E4%BE%8B/" title="Docker 3. 示例">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker 3. 示例</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Docker%201.%20%E5%AE%89%E8%A3%85/" title="Docker 1. 安装">
+                        <span class="hidden-mobile">Docker 1. 安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

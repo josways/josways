@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、什么是 SPISPI ，全称为 Service Provider Interface，是一种服务发现机制。它通过在 ClassPath 路径下的 META-INF&#x2F;services 文件夹查找文件，自动加载文件里所定义的类。 这一机制为很多框架扩展提供了可能，比如在 Dubbo、JDBC 中都使用到了 SPI 机制。我们先通过一个很简单的例子来看下它是怎么用的。 1、小栗子首先，我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java SPI 机制">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/Java%20SPI%20%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="一、什么是 SPISPI ，全称为 Service Provider Interface，是一种服务发现机制。它通过在 ClassPath 路径下的 META-INF&#x2F;services 文件夹查找文件，自动加载文件里所定义的类。 这一机制为很多框架扩展提供了可能，比如在 Dubbo、JDBC 中都使用到了 SPI 机制。我们先通过一个很简单的例子来看下它是怎么用的。 1、小栗子首先，我们">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13230160-91052eb44fd645ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/468/format/webp#crop=0&crop=0&crop=1&crop=1&id=iFs2X&originHeight=103&originWidth=468&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13230160-b74e952c0a304f05.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/464/format/webp#crop=0&crop=0&crop=1&crop=1&id=qprPD&originHeight=102&originWidth=464&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13230160-37de0e9488755cb7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp#crop=0&crop=0&crop=1&crop=1&id=K2NzW&originHeight=120&originWidth=489&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=">
+<meta property="article:published_time" content="2022-04-25T14:46:00.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.938Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="SPI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13230160-91052eb44fd645ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/468/format/webp#crop=0&crop=0&crop=1&crop=1&id=iFs2X&originHeight=103&originWidth=468&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=">
+  
+  
+  
+  <title>Java SPI 机制 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java SPI 机制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:46" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          69 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java SPI 机制</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="一、什么是-SPI"><a href="#一、什么是-SPI" class="headerlink" title="一、什么是 SPI"></a>一、什么是 SPI</h3><p>SPI ，全称为 Service Provider Interface，是一种服务发现机制。它通过在 ClassPath 路径下的 META-INF&#x2F;services 文件夹查找文件，自动加载文件里所定义的类。</p>
+<p>这一机制为很多框架扩展提供了可能，比如在 Dubbo、JDBC 中都使用到了 SPI 机制。我们先通过一个很简单的例子来看下它是怎么用的。</p>
+<h4 id="1、小栗子"><a href="#1、小栗子" class="headerlink" title="1、小栗子"></a>1、小栗子</h4><p>首先，我们需要定义一个接口，SPIService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.viewscenes.netsupervisor.spi;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">SPIService</span> &#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后，定义两个实现类，没别的意思，只输入一句话。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.viewscenes.netsupervisor.spi;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpiImpl1</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">SPIService</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;SpiImpl1.execute()&quot;</span>);<br>    &#125;<br>&#125;<br>----------------------我是乖巧的分割线----------------------<br><span class="hljs-keyword">package</span> com.viewscenes.netsupervisor.spi;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpiImpl2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">SPIService</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;SpiImpl2.execute()&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后呢，要在 ClassPath 路径下配置添加一个文件。文件名字是接口的全限定类名，内容是实现类的全限定类名，多个实现类用换行符分隔。<br>文件路径如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13230160-91052eb44fd645ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/468/format/webp#crop=0&crop=0&crop=1&crop=1&id=iFs2X&originHeight=103&originWidth=468&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>SPI 配置文件位置</p>
+<p>内容就是实现类的全限定类名：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">com<span class="hljs-selector-class">.viewscenes</span><span class="hljs-selector-class">.netsupervisor</span><span class="hljs-selector-class">.spi</span><span class="hljs-selector-class">.SpiImpl1</span><br>com<span class="hljs-selector-class">.viewscenes</span><span class="hljs-selector-class">.netsupervisor</span><span class="hljs-selector-class">.spi</span><span class="hljs-selector-class">.SpiImpl2</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2、测试"><a href="#2、测试" class="headerlink" title="2、测试"></a>2、测试</h4><p>然后我们就可以通过<code>ServiceLoader.load或者Service.providers</code>方法拿到实现类的实例。其中，<code>Service.providers</code>包位于<code>sun.misc.Service</code>，而<code>ServiceLoader.load</code>包位于<code>java.util.ServiceLoader</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        Iterator&lt;SPIService&gt; providers = Service.providers(SPIService.class);<br>        ServiceLoader&lt;SPIService&gt; load = ServiceLoader.load(SPIService.class);<br><br>        <span class="hljs-keyword">while</span>(providers.hasNext()) &#123;<br>            <span class="hljs-type">SPIService</span> <span class="hljs-variable">ser</span> <span class="hljs-operator">=</span> providers.next();<br>            ser.execute();<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;--------------------------------&quot;</span>);<br>        Iterator&lt;SPIService&gt; iterator = load.iterator();<br>        <span class="hljs-keyword">while</span>(iterator.hasNext()) &#123;<br>            <span class="hljs-type">SPIService</span> <span class="hljs-variable">ser</span> <span class="hljs-operator">=</span> iterator.next();<br>            ser.execute();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>两种方式的输出结果是一致的：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css">SpiImpl1<span class="hljs-selector-class">.execute</span>()<br>SpiImpl2<span class="hljs-selector-class">.execute</span>()<br>--------------------------------<br>SpiImpl1<span class="hljs-selector-class">.execute</span>()<br>SpiImpl2<span class="hljs-selector-class">.execute</span>()<br></code></pre></td></tr></table></figure>
+
+<h3 id="二、源码分析"><a href="#二、源码分析" class="headerlink" title="二、源码分析"></a>二、源码分析</h3><p>我们看到一个位于<code>sun.misc包</code>，一个位于<code>java.util包</code>，sun 包下的源码看不到。我们就以 ServiceLoader.load 为例，通过源码看看它里面到底怎么做的。</p>
+<h4 id="1、ServiceLoader"><a href="#1、ServiceLoader" class="headerlink" title="1、ServiceLoader"></a>1、ServiceLoader</h4><p>首先，我们先来了解下 ServiceLoader，看看它的类结构。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ServiceLoader</span>&lt;S&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterable</span>&lt;S&gt;<br>    <span class="hljs-comment">//配置文件的路径</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">PREFIX</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;META-INF/services/&quot;</span>;<br>    <span class="hljs-comment">//加载的服务类或接口</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Class&lt;S&gt; service;<br>    <span class="hljs-comment">//已加载的服务类集合</span><br>    <span class="hljs-keyword">private</span> LinkedHashMap&lt;String,S&gt; providers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedHashMap</span>&lt;&gt;();<br>    <span class="hljs-comment">//类加载器</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ClassLoader loader;<br>    <span class="hljs-comment">//内部类，真正加载服务类</span><br>    <span class="hljs-keyword">private</span> LazyIterator lookupIterator;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2、Load"><a href="#2、Load" class="headerlink" title="2、Load"></a>2、Load</h4><p>load 方法创建了一些属性，重要的是实例化了内部类，LazyIterator。最后返回 ServiceLoader 的实例。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs dart">public <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceLoader</span>&lt;<span class="hljs-title">S</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterable</span>&lt;<span class="hljs-title">S</span>&gt;</span><br><span class="hljs-class">    <span class="hljs-title">private</span> <span class="hljs-title">ServiceLoader</span>(<span class="hljs-title">Class</span>&lt;<span class="hljs-title">S</span>&gt; <span class="hljs-title">svc</span>, <span class="hljs-title">ClassLoader</span> <span class="hljs-title">cl</span>) </span>&#123;<br>        <span class="hljs-comment">//要加载的接口</span><br>        service = Objects.requireNonNull(svc, <span class="hljs-string">&quot;Service interface cannot be null&quot;</span>);<br>        <span class="hljs-comment">//类加载器</span><br>        loader = (cl == <span class="hljs-keyword">null</span>) ? ClassLoader.getSystemClassLoader() : cl;<br>        <span class="hljs-comment">//访问控制器</span><br>        acc = (System.getSecurityManager() != <span class="hljs-keyword">null</span>) ? AccessController.getContext() : <span class="hljs-keyword">null</span>;<br>        <span class="hljs-comment">//先清空</span><br>        providers.clear();<br>        <span class="hljs-comment">//实例化内部类</span><br>        LazyIterator lookupIterator = <span class="hljs-keyword">new</span> LazyIterator(service, loader);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、查找实现类"><a href="#3、查找实现类" class="headerlink" title="3、查找实现类"></a>3、查找实现类</h4><p>查找实现类和创建实现类的过程，都在 LazyIterator 完成。当我们调用 iterator.hasNext 和 iterator.next 方法的时候，实际上调用的都是 LazyIterator 的相应方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> Iterator&lt;S&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Iterator</span>&lt;S&gt;() &#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> lookupIterator.hasNext();<br>        &#125;<br>        <span class="hljs-keyword">public</span> S <span class="hljs-title function_">next</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> lookupIterator.next();<br>        &#125;<br>        .......<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>所以，我们重点关注 lookupIterator.hasNext()方法，它最终会调用到 hasNextService。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs dart">private <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">S</span>&gt;</span>&#123;<br>    Class&lt;S&gt; service;<br>    ClassLoader loader;<br>    Enumeration&lt;URL&gt; configs = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-built_in">Iterator</span>&lt;<span class="hljs-built_in">String</span>&gt; pending = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-built_in">String</span> nextName = <span class="hljs-keyword">null</span>;<br>    private boolean hasNextService() &#123;<br>        <span class="hljs-comment">//第二次调用的时候，已经解析完成了，直接返回</span><br>        <span class="hljs-keyword">if</span> (nextName != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (configs == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-comment">//META-INF/services/ 加上接口的全限定类名，就是文件服务类的文件</span><br>            <span class="hljs-comment">//META-INF/services/com.viewscenes.netsupervisor.spi.SPIService</span><br>            <span class="hljs-built_in">String</span> fullName = PREFIX + service.getName();<br>            <span class="hljs-comment">//将文件路径转成URL对象</span><br>            configs = loader.getResources(fullName);<br>        &#125;<br>        <span class="hljs-keyword">while</span> ((pending == <span class="hljs-keyword">null</span>) || !pending.hasNext()) &#123;<br>            <span class="hljs-comment">//解析URL文件对象，读取内容，最后返回</span><br>            pending = parse(service, configs.nextElement());<br>        &#125;<br>        <span class="hljs-comment">//拿到第一个实现类的类名</span><br>        nextName = pending.next();<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、创建实例"><a href="#4、创建实例" class="headerlink" title="4、创建实例"></a>4、创建实例</h4><p>当然，调用 next 方法的时候，实际调用到的是，lookupIterator.nextService。它通过反射的方式，创建实现类的实例并返回。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LazyIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;S&gt;&#123;<br>    <span class="hljs-keyword">private</span> S <span class="hljs-title function_">nextService</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">//全限定类名</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">cn</span> <span class="hljs-operator">=</span> nextName;<br>        nextName = <span class="hljs-literal">null</span>;<br>        <span class="hljs-comment">//创建类的Class对象</span><br>        Class&lt;?&gt; c = Class.forName(cn, <span class="hljs-literal">false</span>, loader);<br>        <span class="hljs-comment">//通过newInstance实例化</span><br>        <span class="hljs-type">S</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> service.cast(c.newInstance());<br>        <span class="hljs-comment">//放入集合，返回实例</span><br>        providers.put(cn, p);<br>        <span class="hljs-keyword">return</span> p;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>看到这儿，我想已经很清楚了。获取到类的实例，我们自然就可以对它为所欲为了！</p>
+<h3 id="三、JDBC-中的应用"><a href="#三、JDBC-中的应用" class="headerlink" title="三、JDBC 中的应用"></a>三、JDBC 中的应用</h3><p>我们开头说，SPI 机制为很多框架的扩展提供了可能，其实 JDBC 就应用到了这一机制。回忆一下 JDBC 获取数据库连接的过程。在早期版本中，需要先设置数据库驱动的连接，再通过 DriverManager.getConnection 获取一个 Connection。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">String</span> url = <span class="hljs-string">&quot;jdbc:mysql:///consult?serverTimezone=UTC&quot;</span>;<br><span class="hljs-built_in">String</span> user = <span class="hljs-string">&quot;root&quot;</span>;<br><span class="hljs-built_in">String</span> password = <span class="hljs-string">&quot;root&quot;</span>;<br><br>Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>);<br>Connection connection = DriverManager.getConnection(url, user, password);<br></code></pre></td></tr></table></figure>
+
+<p>在较新版本中(具体哪个版本，笔者没有验证)，设置数据库驱动连接，这一步骤就不再需要，那么它是怎么分辨是哪种数据库的呢？答案就在 SPI。</p>
+<h4 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h4><p>我们把目光回到<code>DriverManager</code>类，它在静态代码块里面做了一件比较重要的事。很明显，它已经通过 SPI 机制， 把数据库驱动连接初始化了。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DriverManager</span> &#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        loadInitialDrivers();<br>        println(<span class="hljs-string">&quot;JDBC DriverManager initialized&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>具体过程还得看 loadInitialDrivers，它在里面查找的是 Driver 接口的服务类，所以它的文件路径就是：META-INF&#x2F;services&#x2F;java.sql.Driver。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DriverManager</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">loadInitialDrivers</span><span class="hljs-params">()</span> &#123;<br>        AccessController.doPrivileged(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PrivilegedAction</span>&lt;Void&gt;() &#123;<br>            <span class="hljs-keyword">public</span> Void <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>                <span class="hljs-comment">//很明显，它要加载Driver接口的服务类，Driver接口的包为:java.sql.Driver</span><br>                <span class="hljs-comment">//所以它要找的就是META-INF/services/java.sql.Driver文件</span><br>                ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);<br>                Iterator&lt;Driver&gt; driversIterator = loadedDrivers.iterator();<br>                <span class="hljs-keyword">try</span>&#123;<br>                    <span class="hljs-comment">//查到之后创建对象</span><br>                    <span class="hljs-keyword">while</span>(driversIterator.hasNext()) &#123;<br>                        driversIterator.next();<br>                    &#125;<br>                &#125; <span class="hljs-keyword">catch</span>(Throwable t) &#123;<br>                    <span class="hljs-comment">// Do nothing</span><br>                &#125;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>那么，这个文件哪里有呢？我们来看 MySQL 的 jar 包，就是这个文件，文件内容为：<code>com.mysql.cj.jdbc.Driver</code>。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13230160-b74e952c0a304f05.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/464/format/webp#crop=0&crop=0&crop=1&crop=1&id=qprPD&originHeight=102&originWidth=464&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>MySQL SPI 文件</p>
+<h4 id="2、创建实例"><a href="#2、创建实例" class="headerlink" title="2、创建实例"></a>2、创建实例</h4><p>上一步已经找到了 MySQL 中的 com.mysql.cj.jdbc.Driver 全限定类名，当调用 next 方法时，就会创建这个类的实例。它就完成了一件事，向 DriverManager 注册自身的实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Driver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">NonRegisteringDriver</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">java</span>.sql.Driver &#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//注册</span><br>            <span class="hljs-comment">//调用DriverManager类的注册方法</span><br>            <span class="hljs-comment">//往registeredDrivers集合中加入实例</span><br>            java.sql.DriverManager.registerDriver(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Driver</span>());<br>        &#125; <span class="hljs-keyword">catch</span> (SQLException E) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Can&#x27;t register driver!&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Driver</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-comment">// Required for Class.forName().newInstance()</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3、创建-Connection"><a href="#3、创建-Connection" class="headerlink" title="3、创建 Connection"></a>3、创建 Connection</h4><p>在 DriverManager.getConnection()方法就是创建连接的地方，它通过循环已注册的数据库驱动程序，调用其 connect 方法，获取连接并返回。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Connection <span class="hljs-title function_">getConnection</span><span class="hljs-params">(</span><br><span class="hljs-params">        String url, java.util.Properties info, Class&lt;?&gt; caller)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>    <span class="hljs-comment">//registeredDrivers中就包含com.mysql.cj.jdbc.Driver实例</span><br>    <span class="hljs-keyword">for</span>(DriverInfo aDriver : registeredDrivers) &#123;<br>        <span class="hljs-keyword">if</span>(isDriverAllowed(aDriver.driver, callerCL)) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//调用connect方法创建连接</span><br>                <span class="hljs-type">Connection</span> <span class="hljs-variable">con</span> <span class="hljs-operator">=</span> aDriver.driver.connect(url, info);<br>                <span class="hljs-keyword">if</span> (con != <span class="hljs-literal">null</span>) &#123;<br>                    <span class="hljs-keyword">return</span> (con);<br>                &#125;<br>            &#125;<span class="hljs-keyword">catch</span> (SQLException ex) &#123;<br>                <span class="hljs-keyword">if</span> (reason == <span class="hljs-literal">null</span>) &#123;<br>                    reason = ex;<br>                &#125;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            println(<span class="hljs-string">&quot;    skipping: &quot;</span> + aDriver.getClass().getName());<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、再扩展"><a href="#4、再扩展" class="headerlink" title="4、再扩展"></a>4、再扩展</h4><p>既然我们知道 JDBC 是这样创建数据库连接的，我们能不能再扩展一下呢？如果我们自己也创建一个 java.sql.Driver 文件，自定义实现类 MyDriver，那么，在获取连接的前后就可以动态修改一些信息。</p>
+<p>还是先在项目 ClassPath 下创建文件，文件内容为自定义驱动类<code>com.viewscenes.netsupervisor.spi.MyDriver</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13230160-37de0e9488755cb7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/489/format/webp#crop=0&crop=0&crop=1&crop=1&id=K2NzW&originHeight=120&originWidth=489&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>自定义数据库驱动程序</p>
+<p>我们的 MyDriver 实现类，继承自 MySQL 中的 NonRegisteringDriver，还要实现 java.sql.Driver 接口。这样，在调用 connect 方法的时候，就会调用到此类，但实际创建的过程还靠 MySQL 完成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.viewscenes.netsupervisor.spi<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDriver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">NonRegisteringDriver</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Driver</span>&#123;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            java.sql.DriverManager.registerDriver(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyDriver</span>());<br>        &#125; <span class="hljs-keyword">catch</span> (SQLException E) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Can&#x27;t register driver!&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyDriver</span><span class="hljs-params">()</span><span class="hljs-keyword">throws</span> SQLException &#123;&#125;<br><br>    <span class="hljs-keyword">public</span> Connection <span class="hljs-title function_">connect</span><span class="hljs-params">(String url, Properties info)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        System.out.println(<span class="hljs-string">&quot;准备创建数据库连接.url:&quot;</span>+url);<br>        System.out.println(<span class="hljs-string">&quot;JDBC配置信息：&quot;</span>+info);<br>        info.setProperty(<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;root&quot;</span>);<br>        <span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span>  <span class="hljs-built_in">super</span>.connect(url, info);<br>        System.out.println(<span class="hljs-string">&quot;数据库连接创建完成!&quot;</span>+connection.toString());<br>        <span class="hljs-keyword">return</span> connection;<br>    &#125;<br>&#125;<br>--------------------输出结果---------------------<br>准备创建数据库连接.url:jdbc:mysql:<span class="hljs-comment">///consult?serverTimezone=UTC</span><br>JDBC配置信息：&#123;user=root, password=root&#125;<br>数据库连接创建完成!com.mysql.cj.jdbc.ConnectionImpl@7cf10a6f<br></code></pre></td></tr></table></figure>
+
+<p>作者：清幽之地<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3a3edbcd8f24">https://www.jianshu.com/p/3a3edbcd8f24</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java%E7%9F%A5%E8%AF%86/" class="category-chain-item">Java知识</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SPI/">#SPI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java SPI 机制</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/Java SPI 机制/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Jenkins%E5%AE%89%E8%A3%85/" title="Jenkins安装">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Jenkins安装</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Java%20%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Java 多线程">
+                        <span class="hidden-mobile">Java 多线程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

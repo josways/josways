@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="JOSWAY">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="总览-核心特性PDF 版本:第一节 系列总览-核心特性.pdf Spring Boot 三大特性组件 自动 装配: Web MVC , Web Flux ,JDBC 等 激活: @EnableAutoConfiguration 配置: &#x2F;METE-INF&#x2F;spring.factories (元信息目录,工厂机制,key value 形式) 实现: XXXAutoConfiguration  嵌入式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot 1. 总览-核心特性">
+<meta property="og:url" content="https://blog.josway.cc/2022/04/25/yuque/Spring%20Boot%201.%20%E6%80%BB%E8%A7%88-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="JOSWAY&#39;S BLOG">
+<meta property="og:description" content="总览-核心特性PDF 版本:第一节 系列总览-核心特性.pdf Spring Boot 三大特性组件 自动 装配: Web MVC , Web Flux ,JDBC 等 激活: @EnableAutoConfiguration 配置: &#x2F;METE-INF&#x2F;spring.factories (元信息目录,工厂机制,key value 形式) 实现: XXXAutoConfiguration  嵌入式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-25T14:47:20.000Z">
+<meta property="article:modified_time" content="2023-03-29T14:50:13.932Z">
+<meta property="article:author" content="JOSWAY">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Spring Boot 1. 总览-核心特性 - JOSWAY&#39;S BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.josway.cc","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>JOSWAY</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Spring Boot 1. 总览-核心特性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-25 22:47" pubdate>
+          2022年4月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring Boot 1. 总览-核心特性</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>总览-核心特性<br>PDF 版本:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/28199557/1650898841669-9392a1db-ebc5-4a5d-adcd-da8b8e20c2bc.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/pdf/28199557/1650898841669-9392a1db-ebc5-4a5d-adcd-da8b8e20c2bc.pdf%22,%22name%22:%22%E7%AC%AC%E4%B8%80%E8%8A%82+%E7%B3%BB%E5%88%97%E6%80%BB%E8%A7%88-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7.pdf%22,%22size%22:314157,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22status%22:%22done%22,%22taskId%22:%22u0984f805-153f-418b-aad4-76df9dce391%22,%22taskType%22:%22upload%22,%22id%22:%22u11bfeaba%22,%22card%22:%22file%22%7D">第一节 系列总览-核心特性.pdf</a></p>
+<h2 id="Spring-Boot-三大特性"><a href="#Spring-Boot-三大特性" class="headerlink" title="Spring Boot 三大特性"></a>Spring Boot 三大特性</h2><h3 id="组件-自动-装配-Web-MVC-Web-Flux-JDBC-等"><a href="#组件-自动-装配-Web-MVC-Web-Flux-JDBC-等" class="headerlink" title="组件 自动 装配: Web MVC , Web Flux ,JDBC 等"></a>组件 自动 装配: Web MVC , Web Flux ,JDBC 等</h3><ul>
+<li>激活: <code>@EnableAutoConfiguration</code></li>
+<li>配置: <code>/METE-INF/spring.factories</code> (元信息目录,工厂机制,key value 形式)</li>
+<li>实现: <code>XXXAutoConfiguration</code></li>
+</ul>
+<h3 id="嵌入式的-Web-容器-Tomcat-Jetty-以及-Undertow"><a href="#嵌入式的-Web-容器-Tomcat-Jetty-以及-Undertow" class="headerlink" title="嵌入式的 Web 容器: Tomcat , Jetty 以及 Undertow"></a>嵌入式的 Web 容器: Tomcat , Jetty 以及 Undertow</h3><ul>
+<li>Web Servlet: Tomcat , Jetty 和 Undertow</li>
+<li>Web Reactive: Netty Web Server</li>
+</ul>
+<h3 id="生产准备特性-指标-健康检查-外部配置化"><a href="#生产准备特性-指标-健康检查-外部配置化" class="headerlink" title="生产准备特性: 指标 , 健康检查 , 外部配置化"></a>生产准备特性: 指标 , 健康检查 , 外部配置化</h3><ul>
+<li>指标(Metrics): &#x2F;actuator&#x2F;metrics</li>
+<li>健康检查(Health Check): &#x2F;actuator&#x2F;health</li>
+<li>外部配置化(Externalized Conﬁguration): &#x2F;actuator&#x2F;configprops</li>
+</ul>
+<h2 id="Web-应用"><a href="#Web-应用" class="headerlink" title="Web 应用"></a>Web 应用</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="传统-Servlet-应用"><a href="#传统-Servlet-应用" class="headerlink" title="传统 Servlet 应用"></a>传统 Servlet 应用</h3><h4 id="Servlet-组件-Servlet-Filter-Listener"><a href="#Servlet-组件-Servlet-Filter-Listener" class="headerlink" title="Servlet 组件: Servlet , Filter , Listener"></a>Servlet 组件: Servlet , Filter , Listener</h4><ul>
+<li>Servlet<ul>
+<li>实现<ul>
+<li><code>@WebServlet</code></li>
+<li>HttpServlet</li>
+<li>注册</li>
+</ul>
+</li>
+<li>URL 映射<ul>
+<li><code>@WebServlet(urlPatterns = &quot;/my/servlet&quot;)</code></li>
+</ul>
+</li>
+<li>注册<ul>
+<li><code>@ServletComponentScan(basePackages = &quot;com.example.demo.web.servlet&quot;)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Filter</li>
+<li>Listener  (在 Servlet 里面的一种事件监听者模式的实现. ServletContextListener , RequestListener)</li>
+</ul>
+<h4 id="Servlet-注册-Servlet-注解-Spring-Bean-RegistrationBean"><a href="#Servlet-注册-Servlet-注解-Spring-Bean-RegistrationBean" class="headerlink" title="Servlet 注册: Servlet 注解 , Spring Bean , RegistrationBean"></a>Servlet 注册: Servlet 注解 , Spring Bean , RegistrationBean</h4><h5 id="Servlet-注解"><a href="#Servlet-注解" class="headerlink" title="Servlet 注解"></a>Servlet 注解</h5><ul>
+<li><code>@ServletComponentScan</code><ul>
+<li><code>@WebServlet</code></li>
+<li><code>@WebFilter</code></li>
+<li><code>@WebListener</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="Spring-Bean"><a href="#Spring-Bean" class="headerlink" title="Spring Bean"></a>Spring Bean</h5><ul>
+<li><code>@Bean</code><ul>
+<li>Servlet</li>
+<li>Filter</li>
+<li>Listener</li>
+</ul>
+</li>
+</ul>
+<h5 id="RegisterationBean"><a href="#RegisterationBean" class="headerlink" title="RegisterationBean"></a>RegisterationBean</h5><ul>
+<li><code>ServletRegisteration</code></li>
+<li><code>FilterRegisteration</code></li>
+<li><code>ServletListenerRegisteration</code></li>
+</ul>
+<h4 id="异步非阻塞-异步-Servlet-非阻塞-Servlet-Servlet-3-0"><a href="#异步非阻塞-异步-Servlet-非阻塞-Servlet-Servlet-3-0" class="headerlink" title="异步非阻塞: 异步 Servlet , 非阻塞 Servlet (Servlet 3.0 )"></a>异步非阻塞: 异步 Servlet , 非阻塞 Servlet (Servlet 3.0 )</h4><h5 id="异步-Servlet"><a href="#异步-Servlet" class="headerlink" title="异步 Servlet"></a>异步 Servlet</h5><ul>
+<li><code>javax.serlvet.ServletRequest#startAsync()</code></li>
+<li><code>javax.serlvet.AsyncContext</code></li>
+</ul>
+<h5 id="非阻塞-Servlet"><a href="#非阻塞-Servlet" class="headerlink" title="非阻塞 Servlet"></a>非阻塞 Servlet</h5><ul>
+<li><code>javax.serlvet.ServletInputStream#setReadListener</code><ul>
+<li><code>javax.serlvet.ReadListener</code></li>
+</ul>
+</li>
+<li><code>javax.serlvet.ServletOutputStream#setWriteListener</code><ul>
+<li><code>javax.servlet.WriteListener</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring-Web-MVC-应用"><a href="#Spring-Web-MVC-应用" class="headerlink" title="Spring Web MVC 应用"></a>Spring Web MVC 应用</h3><h4 id="Web-MVC-视图-模板引擎-内容协商-异常处理等"><a href="#Web-MVC-视图-模板引擎-内容协商-异常处理等" class="headerlink" title="Web MVC 视图: 模板引擎 , 内容协商 , 异常处理等"></a>Web MVC 视图: 模板引擎 , 内容协商 , 异常处理等</h4><ul>
+<li><code>ViewResolver</code></li>
+<li><code>View</code></li>
+</ul>
+<h5 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h5><ul>
+<li>Thymeleaf</li>
+<li>Freemarker</li>
+<li>JSP</li>
+</ul>
+<h5 id="内容协商"><a href="#内容协商" class="headerlink" title="内容协商"></a>内容协商</h5><ul>
+<li><code>ContentNegotiaionConfigurer</code></li>
+<li><code>ContentNegotiaionStrategy</code></li>
+<li><code>ContentNegotiaionViewResolver</code></li>
+</ul>
+<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><ul>
+<li><code>@ExceptionHandler</code></li>
+<li><code>HandlerExceptionResolver</code><ul>
+<li><code>ExceptionHandlerExceptionResolver</code></li>
+</ul>
+</li>
+<li><code>BasicErrorController</code> (Spring Boot)</li>
+</ul>
+<h4 id="Web-MVC-REST-资源服务-资源跨域-服务发现等"><a href="#Web-MVC-REST-资源服务-资源跨域-服务发现等" class="headerlink" title="Web MVC REST: 资源服务 , 资源跨域 , 服务发现等"></a>Web MVC REST: 资源服务 , 资源跨域 , 服务发现等</h4><h5 id="资源服务"><a href="#资源服务" class="headerlink" title="资源服务"></a>资源服务</h5><ul>
+<li><code>@RequestMapping</code><ul>
+<li><code>@GetMapping</code> (查)</li>
+<li><code>@PostMapping</code> (增)</li>
+<li><code>@PutMapping</code> (改)</li>
+<li><code>@DeleteMapping</code> (删)</li>
+<li>…</li>
+</ul>
+</li>
+<li><code>@ResponseBody</code></li>
+<li><code>@RequestBody</code></li>
+</ul>
+<h5 id="资源跨域"><a href="#资源跨域" class="headerlink" title="资源跨域"></a>资源跨域</h5><ul>
+<li><code>CrossOrigin</code></li>
+<li><code>WebMvcConfigurer#addCorsMappings</code></li>
+<li>传统解决方案<ul>
+<li>iFrame</li>
+<li>JSONP</li>
+</ul>
+</li>
+</ul>
+<h5 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h5><ul>
+<li>HATEOS</li>
+</ul>
+<h4 id="Web-MVC-核心-核心架构-处理流程-核心组件"><a href="#Web-MVC-核心-核心架构-处理流程-核心组件" class="headerlink" title="Web MVC 核心:   核心架构 , 处理流程 , 核心组件"></a>Web MVC 核心:   核心架构 , 处理流程 , 核心组件</h4><h5 id="核心架构"><a href="#核心架构" class="headerlink" title="核心架构"></a>核心架构</h5><h5 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h5><h5 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h5><ul>
+<li><code>DispatcherServlet</code></li>
+<li><code>HandlerMapping</code></li>
+<li><code>HandlerAdapter</code></li>
+<li><code>ViewResolver</code></li>
+<li>…</li>
+</ul>
+<h3 id="Spring-Web-Flux-应用"><a href="#Spring-Web-Flux-应用" class="headerlink" title="Spring Web Flux 应用"></a>Spring Web Flux 应用</h3><h4 id="Reactor-基础"><a href="#Reactor-基础" class="headerlink" title="Reactor 基础"></a>Reactor 基础</h4><h5 id="Java-Lambda"><a href="#Java-Lambda" class="headerlink" title="Java Lambda"></a>Java Lambda</h5><h5 id="Mono"><a href="#Mono" class="headerlink" title="Mono"></a>Mono</h5><h5 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h5><h4 id="Web-Flux-核心"><a href="#Web-Flux-核心" class="headerlink" title="Web Flux 核心"></a>Web Flux 核心</h4><h5 id="Web-MVC-注解兼容"><a href="#Web-MVC-注解兼容" class="headerlink" title="Web MVC 注解兼容"></a>Web MVC 注解兼容</h5><ul>
+<li><code>@Controller</code></li>
+<li><code>@RequestMapping</code></li>
+<li><code>@ResponseBody</code></li>
+<li><code>@RequestBody</code></li>
+<li>…</li>
+</ul>
+<h5 id="函数式声明"><a href="#函数式声明" class="headerlink" title="函数式声明"></a>函数式声明</h5><ul>
+<li><code>RouterFunction</code></li>
+</ul>
+<h5 id="异步非阻塞"><a href="#异步非阻塞" class="headerlink" title="异步非阻塞"></a>异步非阻塞</h5><ul>
+<li>Servlet 3.1</li>
+<li>Netty Reactor</li>
+</ul>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><h5 id="页面渲染"><a href="#页面渲染" class="headerlink" title="页面渲染"></a>页面渲染</h5><h5 id="REST-应用"><a href="#REST-应用" class="headerlink" title="REST 应用"></a>REST 应用</h5><h5 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h5><h3 id="Web-Server-应用"><a href="#Web-Server-应用" class="headerlink" title="Web Server 应用"></a>Web Server 应用</h3><h4 id="切换-Web-Server"><a href="#切换-Web-Server" class="headerlink" title="切换 Web Server"></a>切换 Web Server</h4><h5 id="切换其他-Servlet-容器"><a href="#切换其他-Servlet-容器" class="headerlink" title="切换其他 Servlet 容器"></a>切换其他 Servlet 容器</h5><ul>
+<li>Tomcat -&gt; Jetty</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>        <span class="hljs-comment">&lt;!-- Exclude the Tomcat dependency --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span> <span class="hljs-comment">&lt;!-- Use Jetty instead --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-jetty<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="替换-Servlet-容器"><a href="#替换-Servlet-容器" class="headerlink" title="替换 Servlet 容器"></a>替换 Servlet 容器</h5><ul>
+<li>WebFlux</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--        &lt;dependency&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;exclusions&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--                &lt;!– Exclude the Tomcat dependency –&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--                &lt;exclusion&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--                    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--                &lt;/exclusion&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;/exclusions&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;/dependency&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;!– Use Jetty instead –&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;dependency&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--            &lt;artifactId&gt;spring-boot-starter-jetty&lt;/artifactId&gt;--&gt;</span><br><span class="hljs-comment">&lt;!--        &lt;/dependency&gt;--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-webflux<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="自定义-Servlet-Web-Server"><a href="#自定义-Servlet-Web-Server" class="headerlink" title="自定义 Servlet Web Server"></a>自定义 Servlet Web Server</h4><ul>
+<li><code>WebServerFactoryCustomizer</code></li>
+</ul>
+<h4 id="自定义-Reactive-Web-Server"><a href="#自定义-Reactive-Web-Server" class="headerlink" title="自定义 Reactive Web Server"></a>自定义 Reactive Web Server</h4><ul>
+<li><code>ReactiveWebServerFactoryCustomizer</code></li>
+</ul>
+<h2 id="数据相关"><a href="#数据相关" class="headerlink" title="数据相关"></a>数据相关</h2><h3 id="关系型数据"><a href="#关系型数据" class="headerlink" title="关系型数据"></a>关系型数据</h3><h4 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h4><h5 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h5><ul>
+<li><code>javax.sql.DataSource</code></li>
+</ul>
+<h5 id="JdbcTemplate"><a href="#JdbcTemplate" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h5><h5 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h5><ul>
+<li><code>DataSourceAutoConfiguration</code></li>
+</ul>
+<h4 id="JPA"><a href="#JPA" class="headerlink" title="JPA"></a>JPA</h4><h5 id="依赖-1"><a href="#依赖-1" class="headerlink" title="依赖"></a>依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="实体映射关系"><a href="#实体映射关系" class="headerlink" title="实体映射关系"></a>实体映射关系</h5><ul>
+<li><code>@javax.persistence.OneToOne</code></li>
+<li><code>@javax.persistence.OneToMany</code></li>
+<li><code>@javax.persistence.ManyToOne</code></li>
+<li><code>@javax.persistence.ManyToMany</code></li>
+<li>…</li>
+</ul>
+<h5 id="实体操作"><a href="#实体操作" class="headerlink" title="实体操作"></a>实体操作</h5><ul>
+<li><code>javax.persistence.EntityManager</code></li>
+</ul>
+<h5 id="自动装配-1"><a href="#自动装配-1" class="headerlink" title="自动装配"></a>自动装配</h5><ul>
+<li><code>HibernateJpaAutoConfiguration</code></li>
+</ul>
+<h4 id="事务（Transaction）"><a href="#事务（Transaction）" class="headerlink" title="事务（Transaction）"></a>事务（Transaction）</h4><h5 id="依赖-2"><a href="#依赖-2" class="headerlink" title="依赖"></a>依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-tx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="Spring-事务抽象"><a href="#Spring-事务抽象" class="headerlink" title="Spring 事务抽象"></a>Spring 事务抽象</h5><ul>
+<li><code>PlatformTransactionManager</code></li>
+</ul>
+<h5 id="JDBC-事务处理"><a href="#JDBC-事务处理" class="headerlink" title="JDBC 事务处理"></a>JDBC 事务处理</h5><ul>
+<li><code>DataSourceTransactionManager</code></li>
+</ul>
+<h5 id="自动装配-2"><a href="#自动装配-2" class="headerlink" title="自动装配"></a>自动装配</h5><ul>
+<li><code>TransactionAutoConfiguration</code></li>
+</ul>
+<h2 id="功能扩展"><a href="#功能扩展" class="headerlink" title="功能扩展"></a>功能扩展</h2><h3 id="Spring-Boot-应用"><a href="#Spring-Boot-应用" class="headerlink" title="Spring Boot 应用"></a>Spring Boot 应用</h3><h4 id="SpringApplication"><a href="#SpringApplication" class="headerlink" title="SpringApplication"></a>SpringApplication</h4><h5 id="失败分析"><a href="#失败分析" class="headerlink" title="失败分析"></a>失败分析</h5><ul>
+<li><code>FailureAnalysisReporter</code></li>
+</ul>
+<h5 id="应用特性"><a href="#应用特性" class="headerlink" title="应用特性"></a>应用特性</h5><ul>
+<li><code>SpringApplication</code> Fluent API</li>
+</ul>
+<h5 id="Spring-Boot-配置"><a href="#Spring-Boot-配置" class="headerlink" title="Spring Boot 配置"></a>Spring Boot 配置</h5><ul>
+<li>外部化配置<ul>
+<li><code>ConfigurationProperty</code></li>
+</ul>
+</li>
+<li><code>@Profile</code></li>
+<li>配置属性<ul>
+<li><code>PropertySources</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Spring-Boot-Starter"><a href="#Spring-Boot-Starter" class="headerlink" title="Spring Boot Starter"></a>Spring Boot Starter</h4><h2 id="运维管理"><a href="#运维管理" class="headerlink" title="运维管理"></a>运维管理</h2><h3 id="Spring-Boot-Actuator"><a href="#Spring-Boot-Actuator" class="headerlink" title="Spring Boot Actuator"></a>Spring Boot Actuator</h3><h4 id="依赖-3"><a href="#依赖-3" class="headerlink" title="依赖"></a>依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="端点（Endpoints）"><a href="#端点（Endpoints）" class="headerlink" title="端点（Endpoints）"></a>端点（Endpoints）</h4><h5 id="Web-Endpoints"><a href="#Web-Endpoints" class="headerlink" title="Web Endpoints"></a>Web Endpoints</h5><h5 id="JMX-Endpoints"><a href="#JMX-Endpoints" class="headerlink" title="JMX Endpoints"></a>JMX Endpoints</h5><h4 id="健康检查（Health-Checks）"><a href="#健康检查（Health-Checks）" class="headerlink" title="健康检查（Health Checks）"></a>健康检查（Health Checks）</h4><h5 id="Health"><a href="#Health" class="headerlink" title="Health"></a><code>Health</code></h5><h5 id="HealthIndicator"><a href="#HealthIndicator" class="headerlink" title="HealthIndicator"></a><code>HealthIndicator</code></h5><h4 id="指标（Metrics）"><a href="#指标（Metrics）" class="headerlink" title="指标（Metrics）"></a>指标（Metrics）</h4><h5 id="内建-Metrics"><a href="#内建-Metrics" class="headerlink" title="内建 Metrics"></a>内建 Metrics</h5><ul>
+<li>Web Endpoint : <code>/actuator/metrics</code></li>
+</ul>
+<h5 id="自定义-Metrics"><a href="#自定义-Metrics" class="headerlink" title="自定义 Metrics"></a>自定义 Metrics</h5>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3SpringBoot/" class="category-chain-item">深入理解SpringBoot</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/spring-boot/">#spring boot</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Spring Boot 1. 总览-核心特性</div>
+      <div>https://blog.josway.cc/2022/04/25/yuque/Spring Boot 1. 总览-核心特性/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>JOSWAY</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Spring%20Boot%202.%20%E8%B5%B0%E5%90%91%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" title="Spring Boot 2. 走向自动装配">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring Boot 2. 走向自动装配</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/Spring/" title="Spring">
+                        <span class="hidden-mobile">Spring</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
